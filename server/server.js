@@ -8,7 +8,6 @@ const morgan = require("morgan");
 let {mysqlConnection} = require('./src/database/mysqlConfig');
 let app = express();
 
-console.log(mysqlConnection.query("select 1+4"));
 app.listen(port, ()=>{
 	console.log('Started listening to port '+port);
 })
