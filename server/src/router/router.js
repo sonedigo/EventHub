@@ -1,11 +1,15 @@
 const QueryController = require('../controller/queryController');
+const RegisterController = require('../controller/registerController');
+const CRUDController = require('../controller/CRUDController');
+const loginController = require('../controller/loginController');
+
 
 module.exports = (app) => {
-  //app.post('/order', OrderController.post); //
+  app.post('/register', RegisterController.post); //
 
   app.get('/getuser', QueryController.getuser); //
 
-  //app.patch('/order/:id', OrderController.patchById); //
+  app.patch('/', CRUDController.updateUserInfo); //
 
   //app.delete('/user/:id', UserController.deleteById); //
 }
