@@ -9,7 +9,7 @@ module.exports = (app) => {
 
   app.get('/getuser', QueryController.getuser); //
 
-  //app.patch('/', CRUDController.updateUserInfo); //
+  app.patch('/', CRUDController.updateUserInfo); //
 
   //app.delete('/user/:id', UserController.deleteById); //
 }

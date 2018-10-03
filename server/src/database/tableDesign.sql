@@ -1,5 +1,5 @@
 create table Users(
-     userId int,
+     userId int PRIMARY KEY AUTO_INCREMENT,
      userName varchar(100),
      email varchar(200),
      phone varchar(20),
@@ -7,6 +7,19 @@ create table Users(
      gender char(1),
      created_at TIMESTAMP DEFAULT NOW()
      );
+create table Groups(
+	groupId int PRIMARY KEY AUTO_INCREMENT,
+	groupName varchar(100),
+	email varchar(200),
+    phone varchar(20),
+    password varchar(50),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+create table GroupUsers(
+	groupId int,
+	userId int
+)
 
 create table Roles(
 	roleId int INDENTITY,
