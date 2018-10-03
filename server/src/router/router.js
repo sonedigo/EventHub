@@ -5,11 +5,11 @@ const loginController = require('../controller/loginController');
 
 
 module.exports = (app) => {
-  app.post('/register', RegisterController.post); //
+  app.post('/register', RegisterController.registerUser); //
 
   app.get('/getuser', QueryController.getuser); //
 
-  app.patch('/', CRUDController.updateUserInfo); //
+  //app.patch('/', CRUDController.updateUserInfo); //
 
   //app.delete('/user/:id', UserController.deleteById); //
 }

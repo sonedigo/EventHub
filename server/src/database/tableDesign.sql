@@ -1,10 +1,10 @@
 create table Users(
-     userId int IDENTITY(1,1) NOT NULL,
+     userId int,
      userName varchar(100),
      email varchar(200),
      phone varchar(20),
      password varchar(50),
-     sex char(1),
+     gender char(1),
      created_at TIMESTAMP DEFAULT NOW()
      );
 
