@@ -1,29 +1,21 @@
 const {mysqlConnection} = require('../database/mysqlConfig');
 const userHelper = require('./helper/userHelper');
 const queryService = require('./queryService');
+const authenticateService = require('./authenticateService');
 const _ = require('lodash');
 
 module.exports={
-		createUser(req, res) {
-			console.log(userHelper.createUserId());
-		let userId = userHelper.createUserId();
+		async createUser(req, res) {
 		const userInfo= {
 			userName : req.userName,
 			email : req.email,
 			phone : req.phone,
-			password: req.password,
+			password: authenticateService.encryptPassword(req.password),
 			gender : req.gender,
 		}
-		console.log(userInfo);
+
 		const InsertCommand = 'INSERT INTO Users(userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?)';
-		let InsertData = [ 
-		userInfo.userName, 
-		userInfo.email, 
-		userInfo.phone, 
-		userInfo.password, 
-		userInfo.gender
-		];
-		mysqlConnection.query(InsertCommand, InsertData,function(error, results, fields){
+		await mysqlConnection.query(InsertCommand, userInfo, function(error, results, fields){
 				if(error) throw error;
 				res.status(200).send(results[0]);
 			});
@@ -37,7 +29,7 @@ module.exports={
 		req.userName,
 		req.email,
 		req.phone,
-		req.password,
+		authenticateService.encryptPassword(req.password),
 		req.gender,
 		req.userId
 		];
