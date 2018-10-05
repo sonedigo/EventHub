@@ -16,10 +16,29 @@ create table Groups(
     created_at TIMESTAMP DEFAULT NOW()
 );
 
+create table Events(
+	eventId int PRIMARY KEY AUTO_INCREMENT,
+	eventTitle varchar(100),
+	eventDescription varchar(255),
+	holderEmail varchar(200),
+	holderPhone varchar(200),
+	created_at TIMESTAMP DEFAULT NOW()
+);
+
 create table GroupUsers(
 	groupId int,
 	userId int
-)
+);
+
+create table EventUsers(
+	eventId int,
+	userId int,
+);
+
+create table EventGroups(
+	eventId int,
+	groupId int,
+);
 
 create table Roles(
 	roleId int INDENTITY,

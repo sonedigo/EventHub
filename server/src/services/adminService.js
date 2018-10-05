@@ -19,5 +19,14 @@ module.exports={
 	updateUser() {
 
 	},
+	getAllEvents(){
+		//also show the events sponsor information
+	},
+	getAllUsers(){
+
+	},
+	getAllGroups(){
+		//also show the users in groups
+	}
 
 }
