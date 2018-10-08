@@ -8,12 +8,13 @@ module.exports.createUser= async function(req, res){
 	let userId = await userHelper.createUserId();
 	let userInfo = await userHelper.createUserInfo(req, userId);
 	let createResult = await mysqlPromise.then(function(connection){
-		const InsertCommand = 'INSERT INTO Users(userId,userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?)';
-		 mysqlPromise.query(InsertCommand,userInfo);
-	})
-}
-
-		
+		const InsertCommand = 'INSERT INTO Users(userId, userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?, ?)';
+		let Result = connection.query(InsertCommand,userInfo);
+		return Result;
+	}).then(function(result){
+		console.log(result);
+	});
+}		
 module.exports.getUserInfo_byItself=async function(req, res){
 		queryService.getuser(req, res);
 	}

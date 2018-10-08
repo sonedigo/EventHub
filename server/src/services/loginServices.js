@@ -1,19 +1,16 @@
-const {mysqlConnection} = require('../database/mysqlConfig');
+const {mysqlConnection, mysqlPromise} = require('../database/mysqlConfig');
 const authenticateService = require('./authenticateService');
+const loginHelper = require('./helper/loginHelper');
 
-module.exports={
-		vaildUser(req, res){
-		const username = req.query.username;
-		const password = req.query.password;
-		const userId = await authenticateService.vaildUser(req.query.username, req.query.password);
-		if(userId){
-			const queryCommand = '';
-			const queryResult = await mysqlConnection.query(queryCommand, userId, function(error, results, fields){
-				if(error) throw error;
-				res.status(200).send({userId: userId, results: results});
-			})
-		}else {
-			res.status(400).send('Invaild username or password');
-		}
+module.exports.signIn=async function(req, res){
+	const password = req.password;
+	const username = req.username;
+	let vaildation = await authenticateService.vaildUser(username, password); 
+	if(!validation){
+		res.status(400).send('Invalid Username or Password');
+	}else {
+		let userid = await loginHelper.getUserId(username);
+		let role = await loginHelper.assignRole(userid);
 	}
+
 }

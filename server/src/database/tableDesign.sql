@@ -1,14 +1,14 @@
 create table Users(
-     userId int PRIMARY KEY AUTO_INCREMENT,
+     userId int PRIMARY KEY,
      userName varchar(100),
      email varchar(200),
      phone varchar(20),
-     password varchar(50),
+     password varchar(255),
      gender char(1),
      created_at TIMESTAMP DEFAULT NOW()
      );
 create table Groups(
-	groupId int PRIMARY KEY AUTO_INCREMENT,
+	groupId int PRIMARY KEY,
 	groupName varchar(100),
 	email varchar(200),
     phone varchar(20),
@@ -17,7 +17,7 @@ create table Groups(
 );
 
 create table Events(
-	eventId int PRIMARY KEY AUTO_INCREMENT,
+	eventId int PRIMARY KEY,
 	eventTitle varchar(100),
 	eventDescription varchar(255),
 	location varchar(255),

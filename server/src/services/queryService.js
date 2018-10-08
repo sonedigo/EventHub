@@ -4,7 +4,8 @@ const faker = require('faker');
 
 module.exports={
 	getuser(req, res){
-		mysqlConnection.query('select * from users', function(error, results, fields){
+		const userId = req.userId;
+		mysqlConnection.query('SELECT * FROM users WHERE userId = ?',userId, function(error, results, fields){
 			if(error) {
 				throw error;
 				res.status(400).send(error);
@@ -24,7 +25,8 @@ module.exports={
 			if (err) throw err;
 			console.log(result);
 		});
-	}
+	},
+
 }
 
 
