@@ -10,6 +10,10 @@ module.exports={
 			req.sponsor,
 			req.sponsorPhone,
 			];
-			const InsertCommand = 'INSERT INTO Events(eventTitle, description, date, location, sponsor)'
+			const InsertCommand = 'INSERT INTO Events(eventTitle, description, date, location, sponsor, sponsorPhone) VALUES(?, ?, ?, ?, ?, ?)';
+			mysqlConnection.query(InsertCommand, event, function(error, results, fields){
+				if(error) throw error;
+				//ready for services detail
+			});
 		},
 }
