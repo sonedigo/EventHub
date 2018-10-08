@@ -5,11 +5,13 @@ const LoginController = require('../controller/loginController');
 
 
 module.exports = (app) => {
-  app.post('/register', RegisterController.registerUser); //
+  app.post('/register/user', RegisterController.registerUser);
+  app.post('/register/group', RegisterController.registerGroup); //
   //app.post('./postevent')
 
-  app.get('/getuser', QueryController.getuser); //
-  //app.get('/login', LoginController.login);
+  app.get('/getuser', QueryController.getUser); //
+  app.get('/getgroup', QueryController.getGroup);
+  app.get('/login', LoginController.login);
 
   app.patch('/', CRUDController.updateUserInfo); //
 

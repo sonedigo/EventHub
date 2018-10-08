@@ -1,31 +1,33 @@
 const {mysqlConnection} = require('../database/mysqlConfig');
+const userService = require('./userService');
+const groupService = require('./requireService');
 
 module.exports={
-	createGroup(req, res) {
+	createGroup:async function(req, res) {
 
 	},
-	deleteGroup(req, res) {
+	deleteGroupL:async function(req, res) {
 
 	},
-	updateGroup(req, res) {
+	updateGroup:async function(req, res) {
 
 	},
-	createUser() {
+	createUser:async function() {
 
 	},
-	deleteUser() {
+	deleteUser:async function() {
 
 	},
-	updateUser() {
+	updateUser:async function() {
 
 	},
-	getAllEvents(){
+	getAllEvents:async function(){
 		//also show the events sponsor information
 	},
-	getAllUsers(){
+	getAllUsers:async function(){
 
 	},
-	getAllGroups(){
+	getAllGroups:async function(){
 		//also show the users in groups
 	}
 
