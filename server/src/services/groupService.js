@@ -2,7 +2,7 @@ const {mysqlConnection} = require('../database/mysqlConfig');
 
 module.exports={
 	createGroup(){
-		
+
 	},
 	updateGroupInfo() {
 
@@ -10,7 +10,7 @@ module.exports={
 	updateEvent() {
 
 	},
-	createUserForGroup() {
-
+	createUserForGroup(req, res) {
+		
 	}
 }

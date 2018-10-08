@@ -1,29 +1,23 @@
-const {mysqlConnection} = require('../database/mysqlConfig');
+const {mysqlConnection,mysqlPromise} = require('../database/mysqlConfig');
 const userHelper = require('./helper/userHelper');
 const queryService = require('./queryService');
 const authenticateService = require('./authenticateService');
 const _ = require('lodash');
 
-module.exports={
-		async createUser(req, res) {
-		const userInfo= {
-			userName : req.userName,
-			email : req.email,
-			phone : req.phone,
-			password: authenticateService.encryptPassword(req.password),
-			gender : req.gender,
-		}
+module.exports.createUser= async function(req, res){
+	let userId = await userHelper.createUserId();
+	let userInfo = await userHelper.createUserInfo(req, userId);
+	let createResult = await mysqlPromise.then(function(connection){
+		const InsertCommand = 'INSERT INTO Users(userId,userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?)';
+		 mysqlPromise.query(InsertCommand,userInfo);
+	})
+}
 
-		const InsertCommand = 'INSERT INTO Users(userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?)';
-		await mysqlConnection.query(InsertCommand, userInfo, function(error, results, fields){
-				if(error) throw error;
-				res.status(200).send(results[0]);
-			});
-	},
-	getUserInfo_byItself(req, res){
+		
+module.exports.getUserInfo_byItself=async function(req, res){
 		queryService.getuser(req, res);
-	},
-	updateUserInfo(req, res){
+	}
+module.exports.updateUserInfo=async function(req, res){
 		const UpdateCommand = 'UPDATE users SET userName = ?, email = ?, phone = ?, password = ?, gender = ? WHERE id = ?';
 		const UpdateData = [
 		req.userName,
@@ -37,9 +31,8 @@ module.exports={
 			if(error) throw error;
 			res.status(200).send(results[0]);
 		});
-	},
-	editEvent(req, res){
+	}
+module.exports.editEvent=async function(req, res){
 
-	},
-}
+	}
 

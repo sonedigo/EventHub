@@ -1,16 +1,20 @@
-const {mysqlConnection} = require('../../database/mysqlConfig');
+const {mysqlConnection, mysqlPromise} = require('../../database/mysqlConfig');
+const authenticateService = require('../authenticateService');
 
-module.exports={
-	createUserId(){
-		let userId=0;
-		mysqlConnection.query('SELECT count(*) as numberofuser FROM Users',
-			function(error, results, fields){
-				if(error) throw error;
-				let NumberofUser=0;
-				NumberofUser += results[0].numberofuser;
-				userId = ++NumberofUser;
-				console.log(userId);
-			});
-		return userId;
-	} 
+module.exports.createUserId=async function(){
+	mysqlPromise.then(function(connection){
+		connection.query();
+	})
+}
+module.exports.createUserInfo=async function(req, userId){
+	const password = await authenticateService.encryptPassword(req.password);
+	const userInfo= [
+			 userId,
+			 req.userName,
+			 req.email,
+			 req.phone,
+			 password,
+			 req.gender,
+		];
+		return userInfo;
 }

@@ -20,8 +20,13 @@ create table Events(
 	eventId int PRIMARY KEY AUTO_INCREMENT,
 	eventTitle varchar(100),
 	eventDescription varchar(255),
-	holderEmail varchar(200),
-	holderPhone varchar(200),
+	location varchar(255),
+	startsDate varchar(50),
+	endsDate varchar(50),
+	OrganizerName varchar(50),
+	OrganizerDescription varchar(255),
+	OrganizerEmail varchar(200),
+	OrganizerPhone varchar(200),
 	created_at TIMESTAMP DEFAULT NOW()
 );
 

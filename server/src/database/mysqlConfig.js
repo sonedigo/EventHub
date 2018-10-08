@@ -1,12 +1,17 @@
 const mysql = require('mysql');
 const faker = require('faker');
-let password = process.env.sqlPassword;
-let mysqlConnection = mysql.createConnection({
+const mysql_Promise = require('promise-mysql');
+const password = process.env.sqlPassword;
+const setting = {
 	host: 'localhost',
 	user: 'sonedigo',
 	password: password,
 	database: 'EventHub'
-});
+};
+
+let mysqlConnection = mysql.createConnection(setting);
+
+let mysqlPromise = mysql_Promise.createConnection(setting);
 
 mysqlConnection.connect(function(err) {
 	if (err) {
@@ -17,4 +22,4 @@ mysqlConnection.connect(function(err) {
 
 });
 
-module.exports = {mysqlConnection};
+module.exports = {mysqlConnection, mysqlPromise};
