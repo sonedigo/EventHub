@@ -1,12 +1,79 @@
 import React from "react";
-import { css } from "emotion";
+import { Grid } from "@material-ui/core";
+import FooterItems from "./footerItems/footerItems";
+import FooterItem from "./footerItems/footerItem/footerItem";
+import { withStyles } from "@material-ui/core/styles";
 
-const Footer = css`
-  background-color: red;
-  border: 1px solid green;
-`;
+const styles = theme => ({
+  container: {
+    background: "#1e0a3c",
+    color: "#dbdae3",
+    padding: "28px",
+    fontSize: "13px"
+  }
+});
+
 const footer = props => {
-  return <div className={Footer}>haha</div>;
+  const { classes } = props;
+  return (
+    <Grid container justify="space-between" className={classes.container}>
+      <FooterItems>
+        Use Eventbrite
+        <FooterItem />
+        <br />
+        <FooterItem>How It Works</FooterItem>
+        <FooterItem>For Large & Complex Events</FooterItem>
+        <FooterItem>Pricing</FooterItem>
+        <FooterItem>Content Standards</FooterItem>
+        <FooterItem>Eventbrite Mobile App</FooterItem>
+        <FooterItem>Eventbrite Check-In App</FooterItem>
+        <FooterItem>Eventbrite Spectrum</FooterItem>
+        <FooterItem>Rally - Fun Things To Do</FooterItem>
+        <FooterItem>Sitemap</FooterItem>
+      </FooterItems>
+      <FooterItems>
+        Plan Events
+        <FooterItem />
+        <br />
+        <FooterItem>Conference Management Software</FooterItem>
+        <FooterItem>Food and Drink Ticketing</FooterItem>
+        <FooterItem>Nonprofits & Fundraisers</FooterItem>
+        <FooterItem>Sell Tickets</FooterItem>
+        <FooterItem>Event Management & Planning</FooterItem>
+        <FooterItem>Online Event Registration</FooterItem>
+        <FooterItem>Online RSVP</FooterItem>
+        <FooterItem>Music Venues & Promoters</FooterItem>
+        <FooterItem>Event Equipment & Staffing</FooterItem>
+        <FooterItem>Eventbrite Sales Number</FooterItem>
+      </FooterItems>
+      <FooterItems>
+        Find Events
+        <FooterItem />
+        <br />
+        <FooterItem>Boston Events</FooterItem>
+        <FooterItem>Chicago Events</FooterItem>
+        <FooterItem>Denver Events</FooterItem>
+        <FooterItem>Houston Events</FooterItem>
+        <FooterItem>Los Angeles Events</FooterItem>
+        <FooterItem>Nashville Events</FooterItem>
+        <FooterItem>New York Events</FooterItem>
+        <FooterItem>San Diego Events</FooterItem>
+        <FooterItem>San Francisco Events</FooterItem>
+        <FooterItem>All Cities</FooterItem>
+      </FooterItems>
+      <FooterItems>
+        Connect With Us
+        <FooterItem />
+        <br />
+        <FooterItem>Contact Support</FooterItem>
+        <FooterItem>Twitter</FooterItem>
+        <FooterItem>Facebook</FooterItem>
+        <FooterItem>LinkedIn</FooterItem>
+        <FooterItem>Instagram</FooterItem>
+        <FooterItem>Google+</FooterItem>
+      </FooterItems>
+    </Grid>
+  );
 };
 
-export default footer;
+export default withStyles(styles)(footer);
