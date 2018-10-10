@@ -19,7 +19,7 @@ const footerItem = props => {
   const { classes } = props;
   return (
     <div className={classes.footerContainer}>
-      <a href="#" className={classes.footerLink}>
+      <a href="/" className={classes.footerLink}>
         {props.children}
       </a>
     </div>

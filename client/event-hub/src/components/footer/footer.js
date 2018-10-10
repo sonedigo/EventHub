@@ -9,7 +9,7 @@ const styles = theme => ({
     background: "#1e0a3c",
     color: "#dbdae3",
     padding: "28px",
-    fontSize: "13px"
+    fontSize: "14px"
   }
 });
 
