@@ -4,6 +4,7 @@ create table Users(
      email varchar(200),
      phone varchar(20),
      password varchar(255),
+     hashsalt varchar(255),
      gender char(1),
      created_at TIMESTAMP DEFAULT NOW()
      );
@@ -46,12 +47,12 @@ create table EventGroups(
 );
 
 create table Roles(
-	roleId int INDENTITY,
+	roleId int PRIMARY KEY,
 	roleName varchar(200)
 );
 
 create table Permission(
-	permissionId int INDENTITY,
+	permissionId int PRIMARY KEY,
 	permissionName varchar(200)
 );
 

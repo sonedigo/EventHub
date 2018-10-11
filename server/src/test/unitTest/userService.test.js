@@ -1,2 +1,4 @@
-const jest = require('jest');
-const {mysqlConnection, mysqlPromise} = require('../database/mysqlConfig');
+const {mysqlConnection, mysqlPromise} = require('../../database/mysqlConfig');
+
+test("register user by user", ()=>{
+})
