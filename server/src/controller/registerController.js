@@ -1,10 +1,21 @@
 const _ = require('lodash');	//load low_dash library
-const xxxservice = require('../services/queryService');
+const queryService = require('../services/queryService');
 const userService = require('../services/userService');
+const authenticateService = require('../service/authenticateService');
 
 module.exports={
 	registerUser(req, res){
 		let queryPart = req.body;
 		userService.createUser(queryPart, res);
 	},
+	checkDuplicate:async function(req, res){
+		let email = req.body.email;
+		let whetherDuplicate = await authenticateService.checkDuplicate(email);
+		if(whetherDuplicate){
+			res.status(400).({duplicate: true});
+		}else {
+			res.status(200).({duplicate: false});
+		}
+
+	}
 }

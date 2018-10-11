@@ -18,3 +18,19 @@ module.exports.validUser = async function (username, password){
 		const WhetherPass = await bcrypt.compare(password, passwordDB);
 		return WhetherPass;
 		}
+
+module.exports.checkDuplicate = async function(email, res){
+		let functionReturn;	
+		const queryCommand = 'SELECT COUNT(email) AS duplicateResult FROM Users WHERE email = ?'
+		const queryresult = await mysqlPromise.then(function(connection){
+			return connection.query(queryCommand, [email]);
+		}).then(function(results){
+			functionReturn = results[0].duplicateResult;
+			if(results[0].duplicateResult){
+				//res.status(400).send({duplicate: true});
+			}else {
+				//res.status(200).send({duplicate: false});
+			}
+		})
+		return functionReturn;
+}

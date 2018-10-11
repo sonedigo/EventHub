@@ -32,6 +32,7 @@ create table Events(
 );
 
 create table GroupUsers(
+	relationId int IDENTITY(10,1) PRIMARY KEY,
 	groupId int,
 	userId int
 );

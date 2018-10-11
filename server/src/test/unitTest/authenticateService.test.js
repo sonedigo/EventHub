@@ -13,4 +13,13 @@ describe('Authenticate Service Test', ()=>{
 		expect(invalidResult).toBe(false);
 	});
 
+	it('Test checkDuplicate',async function(){
+		const email_duplicate = 'sonedigo@gmail.com';
+		const email_new = 'sondigo@gmail.com';
+		const duplicateResult = await authenticateService.checkDuplicate(email_duplicate);
+		const not_duplicateResult = await authenticateService.checkDuplicate(email_new);
+		expect(duplicateResult).not.toBe(0);
+		expect(not_duplicateResult).toBe(0);
+	})
+
 })
