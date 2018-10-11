@@ -4,7 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   appBar: {
-    position: "relative"
+    position: "relative",
+    backgroundColor: "white",
+    boxShadow: "none"
   },
   toolbarTitle: {
     flex: 1
@@ -15,6 +17,9 @@ const styles = theme => ({
   },
   toolbarLink: {
     justifyContent: "flex-end"
+  },
+  underline: {
+    color: "#4b4d63"
   }
 });
 
@@ -44,6 +49,7 @@ const header = props => {
           </div>
         </Toolbar>
       </AppBar>
+      <hr className />
     </React.Fragment>
   );
 };

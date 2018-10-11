@@ -6,10 +6,12 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
+    position: "fixed",
     background: "#1e0a3c",
     color: "#dbdae3",
     padding: "28px",
-    fontSize: "14px"
+    fontSize: "14px",
+    bottom: "0"
   }
 });
 
