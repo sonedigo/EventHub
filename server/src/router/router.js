@@ -14,7 +14,7 @@ module.exports = (app) => {
   app.get('/login', LoginController.login);
   app.get('/check/emailDuplicate',RegisterController.checkDuplicate);
 
-  //app.patch('/', CRUDController.updateUserInfo); //
+  app.patch('/', CRUDController.updateUserInfo); //
 
   //app.delete('/user/:id', UserController.deleteById); //
 }

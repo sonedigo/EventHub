@@ -1,4 +1,4 @@
-const {mysqlConnection, mysqlPromise} = require('../database/mysqlConfig');
+const {mysqlConnection, mysqlPromise} = require('../../database/mysqlConfig');
 
 module.exports.assignRole=async function(userid){
 	let roleId;
@@ -26,6 +26,5 @@ module.exports.getUserId = async function(username){
 		}).then(function(result){
 			userid = result[0].userId;
 	});
-		console.log(userid);
 		return userid;
 }

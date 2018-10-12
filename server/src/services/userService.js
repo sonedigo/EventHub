@@ -7,13 +7,25 @@ const _ = require('lodash');
 module.exports.createUser= async function(req, res){
 	let userId = await userHelper.createUserId();
 	let userInfo = await userHelper.createUserInfo(req, userId);
-	let createResult = await mysqlPromise.then(function(connection){
-		const InsertCommand = 'INSERT INTO Users(userId, userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?, ?)';
-		let Result = connection.query(InsertCommand,userInfo);
-		return Result;
-	}).then(function(result){
-		console.log(result);
-	});
+	let checkRegisterRole = await authenticateService.checkRegisterRole(req.role);
+	if(!checkRegisterRole){
+		res.status(400).send({
+			error:1,
+			description: 'Invaild form'
+		});
+	}else {
+		let createResult = await mysqlPromise.then(function(connection){
+			const InsertCommand = 'INSERT INTO Users(userId, userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?, ?)';
+			let Result = connection.query(InsertCommand,userInfo);
+			const InsertCommand_role = 'INSERT INTO UserRoles(userId, roleId) VALUES(?, ?)';
+			let Result_role = connection.query(InsertCommand_role,[userId, roleId]);
+			return Result;
+		}).then(function(result){
+			res.status(200).send({Register: true});
+		}).catch(function(error){
+			console.log(error);
+		});
+	}	
 }		
 module.exports.getUserInfo_byItself=async function(req, res){
 	queryService.getuser(req, res);
