@@ -5,11 +5,24 @@ import { Link } from "react-router-dom";
 
 const styles = theme => ({
   textField: {
-    width: "300px"
+    width: "350px",
+    [theme.breakpoints.down("sm")]: {
+      width: "300px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "290px"
+    }
   },
+
   button: {
     backgroundColor: "#ff3333",
-    width: "300px"
+    width: "350px",
+    [theme.breakpoints.down("sm")]: {
+      width: "300px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "290px"
+    }
   },
   toolbarItem: {
     textDecoration: "none",
@@ -18,7 +31,7 @@ const styles = theme => ({
 });
 const start = props => {
   let SignUpOrLogIn = "";
-  if (true) {
+  if (false) {
     SignUpOrLogIn = "LogIn";
   } else {
     SignUpOrLogIn = "SignUp";

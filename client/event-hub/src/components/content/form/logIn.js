@@ -5,24 +5,26 @@ import { Link } from "react-router-dom";
 
 const styles = theme => ({
   textField: {
-    width: "300px"
+    width: "350px"
   },
   button: {
     backgroundColor: "#ff3333",
-    width: "300px"
+    width: "350px",
+    margin: "10px 0"
   },
   toolbarItem: {
     textDecoration: "none",
     color: "white"
+  },
+  remarkItem: {
+    textDecoration: "none",
+    color: "#3d64ff",
+    "&:hover": {
+      textDecoration: "underline"
+    }
   }
 });
 const start = props => {
-  let SignUpOrLogIn = "";
-  if (true) {
-    SignUpOrLogIn = "LogIn";
-  } else {
-    SignUpOrLogIn = "SignUp";
-  }
   const { classes } = props;
   return (
     <Fragment>
@@ -37,11 +39,25 @@ const start = props => {
         variant="outlined"
       />
       <br />
+      <TextField
+        id="outlined-password-input"
+        label="Password"
+        className={classes.textField}
+        type="password"
+        autoComplete="current-password"
+        margin="normal"
+        variant="outlined"
+      />
+      <br />
       <Button variant="contained" color="secondary" className={classes.button}>
-        <Link to={`/SignIn/${SignUpOrLogIn}`} className={classes.toolbarItem}>
-          Get Started
+        <Link to={`/SignIn/where`} className={classes.toolbarItem}>
+          Log In
         </Link>
       </Button>
+      <br />
+      <Link to="/SignIn/Status/Pass-reset" className={classes.remarkItem}>
+        Forget password
+      </Link>
     </Fragment>
   );
 };

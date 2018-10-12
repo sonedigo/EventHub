@@ -30,8 +30,10 @@ const logInIcon = props => {
   return (
     <div>
       <Icon className={classes.icon}>accessibility_new</Icon>
-      <div className={classes.title}>Welcome</div>
-      <div className={classes.subTitle}>Create an account.</div>
+      <div className={classes.title}>Welcome back</div>
+      <div className={classes.subTitle}>
+        Please enter your password to log in.
+      </div>
     </div>
   );
 };
