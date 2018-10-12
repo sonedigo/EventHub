@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const faker = require('faker');
+const config = require('config');
 const mysql_Promise = require('promise-mysql');
 const password = process.env.sqlPassword;
 const setting = {

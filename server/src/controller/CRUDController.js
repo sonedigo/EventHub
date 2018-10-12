@@ -7,6 +7,6 @@ const adminService = require('../services/adminService');
 
 module.exports={
 	updateUserInfo(req, res){
-		userService.updateUserInfo(req, res);
+		userService.updateUserInfo(req.body, res);
 	},
 }

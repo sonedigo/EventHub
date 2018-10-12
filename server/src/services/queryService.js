@@ -3,18 +3,21 @@ const faker = require('faker');
 
 
 module.exports={
-	getuser(req, res){
-		const userId = req.userId;
+	getUser:async function(req, res){
+		const userId = req.query.userId;
 		mysqlConnection.query('SELECT * FROM users WHERE userId = ?',userId, function(error, results, fields){
 			if(error) {
 				throw error;
 				res.status(400).send(error);
 			}
-			res.status(200).send(results);
+			res.status(200).send(results[0]);
+			console.log(results[0])
 		});
 	},
+	getGroup:async function(req, res){
 
-	insertdata(req,res){
+	},
+	insertData(req,res){
 		console.log('Insert operation is below:');
 		let person = {
 			email: faker.internet.email(),
