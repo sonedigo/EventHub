@@ -32,6 +32,7 @@ create table Events(
 );
 
 create table GroupUsers(
+	relationId int IDENTITY(10,1) PRIMARY KEY,
 	groupId int,
 	userId int
 );
@@ -46,8 +47,12 @@ create table EventGroups(
 	groupId int,
 );
 
+create table UserRoles(
+
+);
+
 create table Roles(
-	roleId int PRIMARY KEY,
+	roleId int PRIMARY KEY AUTO_INCREMENT,
 	roleName varchar(200)
 );
 
@@ -57,13 +62,10 @@ create table Permission(
 );
 
 create table UserRoles(
+	relationId int PRIMARY KEY AUTO_INCREMENT,
 	userId int NOT NULL,
-	roleId int NOT NULL,
-	CONSTRAINT PK_UserRoles PRIMARY KEY CLUSTERED(
-			userId ASC,
-			roleId ASC
-		)WITH (IGNORE_DUP_KEY = OFF) ON PRIMARY
-)ON PRIMARY;
+	roleId int NOT NULL
+	);
 
 create table RolePermissions(
 	roleId int NOT NULL,

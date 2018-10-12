@@ -11,6 +11,10 @@ module.exports.signIn=async function(req, res){
 	}else {
 		let userid = await loginHelper.getUserId(username);
 		let role = await loginHelper.assignRole(userid);
+		const responseData = {
+			role: role,
+			userId : userid
+		};
+		res.status(200).send(responseData);
 	}
-
 }

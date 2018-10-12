@@ -12,6 +12,7 @@ module.exports = (app) => {
   app.get('/getuser', QueryController.getUser); //
   app.get('/getgroup', QueryController.getGroup);
   app.get('/login', LoginController.login);
+  app.get('/check/emailDuplicate',RegisterController.checkDuplicate);
 
   app.patch('/', CRUDController.updateUserInfo); //
 
