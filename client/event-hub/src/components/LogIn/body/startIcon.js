@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Icon } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -7,7 +7,13 @@ const styles = theme => ({
     lineHeight: "1.2",
     fontSize: "33px",
     letterSpacing: ".6px",
-    margin: "5px 0"
+    margin: "5px 0",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "30px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "27px"
+    }
   },
   subTitle: {
     color: "#6f7287",

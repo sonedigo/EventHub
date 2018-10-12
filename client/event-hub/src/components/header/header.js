@@ -1,6 +1,7 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   appBar: {
@@ -20,6 +21,10 @@ const styles = theme => ({
   },
   underline: {
     color: "#4b4d63"
+  },
+  toolbarItem: {
+    textDecoration: "none",
+    color: "rgba(0, 0, 0, 0.87)"
   }
 });
 
@@ -34,9 +39,9 @@ const header = props => {
             color="inherit"
             className={classes.toolbarTitle}
           >
-            <a href="/" className={classes.logoLink}>
+            <Link to="/" className={classes.logoLink}>
               Eventhub
-            </a>
+            </Link>
           </Typography>
           <div>
             <Button href="/">Browse Events</Button>
@@ -45,7 +50,17 @@ const header = props => {
             <Button href="/" color="secondary">
               Create Event
             </Button>
-            <Button href="/">Sign In</Button>
+            <Button>
+              <Link
+                to={{
+                  pathname: "/SignIn",
+                  search: "?referrer=%2F"
+                }}
+                className={classes.toolbarItem}
+              >
+                Sign In
+              </Link>
+            </Button>
           </div>
         </Toolbar>
       </AppBar>

@@ -1,7 +1,10 @@
 import React, { Fragment } from "react";
-import { Grid, TextField, Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Icon from "./body/icon1";
+import { Switch, Route } from "react-router-dom";
+import StartIcon from "./body/startIcon";
+import SignUpIcon from "./body/signUpIcon";
+import LogInIcon from "./body/logInIcon";
 import Start from "./form/start";
 
 const styles = theme => ({
@@ -17,12 +20,16 @@ const layout = props => {
   return (
     <Fragment>
       <div className={classes.container}>
-        <Grid item xs={4} />
-        <Grid item xs={4}>
-          <Icon />
+        <Grid item xs={2} />
+        <Grid item xs={8}>
+          <Switch>
+            <Route exact path="/SignIn" component={StartIcon} />
+            <Route exact path="/SignIn/SignUp" component={SignUpIcon} />
+            <Route exact path="/SignIn/LogIn" component={LogInIcon} />
+          </Switch>
           <Start />
         </Grid>
-        <Grid item xs={4} />
+        <Grid item xs={2} />
       </div>
     </Fragment>
   );
