@@ -8,41 +8,45 @@ module.exports.createUser= async function(req, res){
 	let userId = await userHelper.createUserId();
 	let userInfo = await userHelper.createUserInfo(req, userId);
 	let checkRegisterRole = await authenticateService.checkRegisterRole(req.role);
-	if(!checkRegisterRole){
+	let checkDuplicateEmail = await authenticateService.checkDuplicateEmail(userInfo.email);
+	let checkDuplicateUsername = await authenticateService.checkDuplicateUsername(userInfo.userName);
+	if(!(checkDuplicateEmail && checkDuplicateUsername)){
 		res.status(400).send({
-			error:1,
-			description: 'Invaild form'
-		});
-	}else {
-		let createResult = await mysqlPromise.then(function(connection){
-			const InsertCommand = 'INSERT INTO Users(userId, userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?, ?)';
-			let Result = connection.query(InsertCommand,userInfo);
-			const InsertCommand_role = 'INSERT INTO UserRoles(userId, roleId) VALUES(?, ?)';
-			let Result_role = connection.query(InsertCommand_role,[userId, roleId]);
-			return Result;
-		}).then(function(result){
-			res.status(200).send({Register: true});
-		}).catch(function(error){
-			console.log(error);
-		});
-	}	
+			error: 2,
+			description: 'duplicate Email or Username'
+		})
+	}else{
+		if(!checkRegisterRole){
+			res.status(400).send({
+				error:1,
+				description: 'Invaild form'
+			});
+		}else {
+			let createResult = await mysqlPromise.then(function(connection){
+				const InsertCommand = 'INSERT INTO Users(userId, userName, email, phone, password, gender) VALUES(?, ?, ?, ?, ?, ?)';
+				let Result = connection.query(InsertCommand,userInfo);
+				const InsertCommand_role = 'INSERT INTO UserRoles(userId, roleId) VALUES(?, ?)';
+				let Result_role = connection.query(InsertCommand_role,[userId, roleId]);
+				return Result;
+			}).then(function(result){
+				res.status(200).send({Register: true});
+			}).catch(function(error){
+				console.log(error);
+			});
+		}	
+	}
+	
 }		
 module.exports.getUserInfo_byItself=async function(req, res){
 	queryService.getuser(req, res);
 }
 module.exports.updateUserInfo=async function(req, res){
-	const UpdateCommand = 'UPDATE users SET userName = ?, email = ?, phone = ?, password = ?, gender = ? WHERE id = ?';
-	const UpdateData = [
-	req.userName,
-	req.email,
-	req.phone,
-	await authenticateService.encryptPassword(req.password),
-	req.gender,
-	req.userId
-	];
+	const password = await authenticateService.encryptPassword(req.password)
+	const UpdateCommand = 'UPDATE users SET userName = ?, email = ?, phone = ?, password = ?, gender = ? WHERE userId = ?';
+	const UpdateData = [req.userName, req.email, req.phone, password, req.gender,req.userId];
 	mysqlConnection.query(UpdateCommand, UpdateData, function(error, results, fields){
 		if(error) throw error;
-		res.status(200).send(results[0]);
+		res.status(200).send("succeed update");
 	});
 }
 module.exports.enrollGroup = async function(req, res){
