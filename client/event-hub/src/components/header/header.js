@@ -53,7 +53,7 @@ const header = props => {
             <Button>
               <Link
                 to={{
-                  pathname: "/SignIn",
+                  pathname: "/SignIn/",
                   search: "?referrer=%2F"
                 }}
                 className={classes.toolbarItem}

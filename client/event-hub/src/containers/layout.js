@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Switch, Route } from "react-router-dom";
@@ -17,28 +17,41 @@ const styles = theme => ({
     color: "#4b4d63"
   }
 });
-const layout = props => {
-  const { classes } = props;
-  return (
-    <Fragment>
-      <div className={classes.container}>
-        <Grid item xs={2} />
-        <Grid item xs={8}>
-          <Switch>
-            <Route exact path="/SignIn" component={StartIcon} />
-            <Route exact path="/SignIn/SignUp" component={SignUpIcon} />
-            <Route exact path="/SignIn/LogIn" component={LogInIcon} />
-          </Switch>
-          <Switch>
-            <Route exact path="/SignIn" component={Start} />
-            <Route exact path="/SignIn/SignUp" component={SignUp} />
-            <Route exact path="/SignIn/LogIn" component={LogIn} />
-          </Switch>
-        </Grid>
-        <Grid item xs={2} />
+class layout extends Component {
+  state = {
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: ""
+  };
+  render() {
+    const { classes } = this.props;
+    return (
+      <div>
+        <div className={classes.container}>
+          <Grid item xs={2} />
+          <Grid item xs={8}>
+            <Switch>
+              <Route
+                exact
+                path="/SignIn"
+                component={StartIcon}
+                email={this.state.email}
+              />
+              <Route exact path="/SignIn/SignUp" component={SignUpIcon} />
+              <Route exact path="/SignIn/LogIn" component={LogInIcon} />
+            </Switch>
+            <Switch>
+              <Route exact path="/SignIn" component={Start} />
+              <Route exact path="/SignIn/SignUp" component={SignUp} />
+              <Route exact path="/SignIn/LogIn" component={LogIn} />
+            </Switch>
+          </Grid>
+          <Grid item xs={2} />
+        </div>
       </div>
-    </Fragment>
-  );
-};
+    );
+  }
+}
 
 export default withStyles(styles)(layout);
