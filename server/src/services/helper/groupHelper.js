@@ -14,9 +14,6 @@ module.exports={
 	createGroupInfo: async function(groupInfo){
 
 	},
-	updateGroupInfo: async function(){
-
-	},
 }
 
 function groudIdResult(num_of_group){

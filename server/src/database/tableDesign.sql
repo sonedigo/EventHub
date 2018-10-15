@@ -41,13 +41,13 @@ create table GroupUsersRelation(
 create table EventUsersRelation(
 	relationId int PRIMARY KEY AUTO_INCREMENT,
 	eventId int,
-	userId int,
+	userId int
 );
 
 create table EventGroupsRelation(
 	relationId int PRIMARY KEY AUTO_INCREMENT,
 	eventId int,
-	groupId int,
+	groupId int
 );
 
 create table UserRolesRelation(
