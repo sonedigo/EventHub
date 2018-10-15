@@ -2,6 +2,7 @@ const _ = require('lodash');	//load low_dash library
 const queryService = require('../services/queryService');
 const userService = require('../services/userService');
 const authenticateService = require('../services/authenticateService');
+const groupService = require('../services/groupService');
 
 module.exports={
 	registerUser(req, res){
@@ -9,7 +10,8 @@ module.exports={
 		userService.createUser(queryPart, res);
 	},
 	registerGroup(req, res){
-
+		let queryPart = req.body;
+		groupService.createGroup(queryPart, res);
 	},
 	checkDuplicate:async function(req, res){
 		let email = req.body.email;

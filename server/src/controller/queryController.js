@@ -1,11 +1,11 @@
 const _ = require('lodash');	//load low_dash library
-const service = require('../services/queryService');
+const queryService = require('../services/queryService');
 
 module.exports={
-	getUser(req, res){
-		service.getUser(req, res);
+	getUser:function(req, res){
+		queryService.getUser(req, res);
 	},
-	getGroup(req, res){
+	getGroup:function(req, res){
 
 	},
 }

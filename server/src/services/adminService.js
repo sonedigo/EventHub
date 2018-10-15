@@ -6,7 +6,7 @@ module.exports={
 	createGroup:async function(req, res) {
 
 	},
-	deleteGroupL:async function(req, res) {
+	deleteGroup:async function(req, res) {
 
 	},
 	updateGroup:async function(req, res) {

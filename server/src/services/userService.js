@@ -35,11 +35,12 @@ module.exports.createUser= async function(req, res){
 			});
 		}	
 	}
-	
-}		
+}
+
 module.exports.getUserInfo_byItself=async function(req, res){
 	queryService.getuser(req, res);
 }
+
 module.exports.updateUserInfo=async function(req, res){
 	const password = await authenticateService.encryptPassword(req.password)
 	const UpdateCommand = 'UPDATE users SET userName = ?, email = ?, phone = ?, password = ?, gender = ? WHERE userId = ?';
@@ -52,6 +53,7 @@ module.exports.updateUserInfo=async function(req, res){
 module.exports.enrollGroup = async function(req, res){
 	let groupId = req.groupId;
 	let userId = req.userId;
+
 }
 module.exports.exitGroup = async function(req, res){
 	let groupId = req.groupId;

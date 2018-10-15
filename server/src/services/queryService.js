@@ -1,4 +1,4 @@
-const {mysqlConnection} = require('../database/mysqlConfig');
+const {mysqlConnection, mysqlPromise} = require('../database/mysqlConfig');
 const faker = require('faker');
 
 
