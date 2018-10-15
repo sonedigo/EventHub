@@ -40,7 +40,7 @@ class start extends Component {
   state = {
     email: ""
   };
-  inputHandler = event => {
+  emailInputHandler = event => {
     this.setState({
       email: event.target.value
     });
@@ -71,7 +71,7 @@ class start extends Component {
           margin="normal"
           variant="outlined"
           value={this.props.email}
-          onChange={this.inputHandler}
+          onChange={this.emailInputHandler}
         />
         <br />
         {/* <div>{this.state.email}</div> */}

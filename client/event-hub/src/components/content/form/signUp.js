@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import SignInServices from "../../../services/api/signInServices";
 
 const styles = theme => ({
   textField: {
@@ -85,7 +86,34 @@ const styles = theme => ({
   }
 });
 class signUp extends Component {
-  state = {};
+  state = {
+    firstName: "",
+    lastName: "",
+    password: ""
+  };
+  firstNameInputHandler = event => {
+    this.setState({
+      firstName: event.target.value
+    });
+  };
+  lastNameInputHandler = event => {
+    this.setState({
+      lastName: event.target.value
+    });
+  };
+  passwordInputHandler = event => {
+    this.setState({
+      password: event.target.value
+    });
+  };
+  signUpPostHandler = () => {
+    const signUpPost = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      password: this.state.password
+    };
+    SignInServices.start(signUpPost);
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -102,18 +130,20 @@ class signUp extends Component {
         />
         <br />
         <TextField
-          id="outlined-name"
+          id="outlined-name-first"
           label="First Name"
           margin="normal"
           variant="outlined"
           className={classes.name}
+          onChange={this.firstNameInputHandler}
         />
         <TextField
-          id="outlined-name"
+          id="outlined-name-last"
           label="Last Name"
           margin="normal"
           variant="outlined"
           className={classes.name}
+          onChange={this.lastNameInputHandler}
         />
         <br />
         <TextField
@@ -124,6 +154,7 @@ class signUp extends Component {
           autoComplete="current-password"
           margin="normal"
           variant="outlined"
+          onChange={this.passwordInputHandler}
         />
         <br />
         <hr className={classes.line} />
@@ -135,6 +166,7 @@ class signUp extends Component {
           variant="contained"
           color="secondary"
           className={classes.button}
+          onClick={this.signUpPostHandler}
         >
           <Link to={`/SignIn/where`} className={classes.toolbarItem}>
             Sign Up

@@ -2,8 +2,28 @@ import Api from "../api";
 import axios from "axios";
 
 export default {
-  start: function(credentials) {
-    return axios
+  start: async function(credentials) {
+    await axios
+      .post("https://jsonplaceholder.typicode.com/posts", credentials)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  logIn: async function(credentials) {
+    await axios
+      .post("https://jsonplaceholder.typicode.com/posts", credentials)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  signUp: async function(credentials) {
+    await axios
       .post("https://jsonplaceholder.typicode.com/posts", credentials)
       .then(res => {
         console.log(res);

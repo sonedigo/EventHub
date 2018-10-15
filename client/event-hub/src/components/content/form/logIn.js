@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import SignInServices from "../../../services/api/signInServices";
 
 const styles = theme => ({
   textField: {
@@ -26,7 +27,18 @@ const styles = theme => ({
 });
 
 class logIn extends Component {
-  state = {};
+  state = { password: "" };
+  passwordInputHandler = event => {
+    this.setState({
+      password: event.target.value
+    });
+  };
+  logInPostHandler = () => {
+    const logInPost = {
+      password: this.state.password
+    };
+    SignInServices.start(logInPost);
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -51,12 +63,14 @@ class logIn extends Component {
           autoComplete="current-password"
           margin="normal"
           variant="outlined"
+          onChange={this.passwordInputHandler}
         />
         <br />
         <Button
           variant="contained"
           color="secondary"
           className={classes.button}
+          onClick={this.logInPostHandler}
         >
           <Link to={`/SignIn/where`} className={classes.toolbarItem}>
             Log In
