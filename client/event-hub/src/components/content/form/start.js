@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import SignInServices from "../../../services/api/signInServices";
 
 const styles = theme => ({
   textField: {
@@ -31,6 +32,11 @@ const styles = theme => ({
 });
 
 class start extends Component {
+  // componentDidMount() {
+  //   Axios.get("https://jsonplaceholder.typicode.com/posts").then(response => {
+  //     console.log(response);
+  //   });
+  // }
   state = {
     email: ""
   };
@@ -39,7 +45,12 @@ class start extends Component {
       email: event.target.value
     });
   };
-
+  emailPostHandler = () => {
+    const emailPost = {
+      email: this.state.email
+    };
+    SignInServices.start(emailPost);
+  };
   render() {
     const { classes } = this.props;
     let SignUpOrLogIn = "";
@@ -68,7 +79,7 @@ class start extends Component {
           variant="contained"
           color="secondary"
           className={classes.button}
-          onClick={this.submitHandler}
+          onClick={this.emailPostHandler}
         >
           <Link to={`/SignIn/${SignUpOrLogIn}`} className={classes.toolbarItem}>
             Get Started
