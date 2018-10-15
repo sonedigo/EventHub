@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -84,58 +84,65 @@ const styles = theme => ({
     }
   }
 });
-const start = props => {
-  const { classes } = props;
-  return (
-    <Fragment>
-      <TextField
-        id="outlined-email-input"
-        label="Enter email"
-        className={classes.textField}
-        type="email"
-        name="email"
-        autoComplete="email"
-        margin="normal"
-        variant="outlined"
-      />
-      <br />
-      <TextField
-        id="outlined-name"
-        label="First Name"
-        margin="normal"
-        variant="outlined"
-        className={classes.name}
-      />
-      <TextField
-        id="outlined-name"
-        label="Last Name"
-        margin="normal"
-        variant="outlined"
-        className={classes.name}
-      />
-      <br />
-      <TextField
-        id="outlined-password-input"
-        label="Password"
-        className={classes.textField}
-        type="password"
-        autoComplete="current-password"
-        margin="normal"
-        variant="outlined"
-      />
-      <br />
-      <hr className={classes.line} />
-      <div className={classes.text}>
-        Your password must be at least 8 characters
-      </div>
-      <br />
-      <Button variant="contained" color="secondary" className={classes.button}>
-        <Link to={`/SignIn/where`} className={classes.toolbarItem}>
-          Sign Up
-        </Link>
-      </Button>
-    </Fragment>
-  );
-};
+class signUp extends Component {
+  state = {};
+  render() {
+    const { classes } = this.props;
+    return (
+      <Fragment>
+        <TextField
+          id="outlined-email-input"
+          label="Enter email"
+          className={classes.textField}
+          type="email"
+          name="email"
+          autoComplete="email"
+          margin="normal"
+          variant="outlined"
+        />
+        <br />
+        <TextField
+          id="outlined-name"
+          label="First Name"
+          margin="normal"
+          variant="outlined"
+          className={classes.name}
+        />
+        <TextField
+          id="outlined-name"
+          label="Last Name"
+          margin="normal"
+          variant="outlined"
+          className={classes.name}
+        />
+        <br />
+        <TextField
+          id="outlined-password-input"
+          label="Password"
+          className={classes.textField}
+          type="password"
+          autoComplete="current-password"
+          margin="normal"
+          variant="outlined"
+        />
+        <br />
+        <hr className={classes.line} />
+        <div className={classes.text}>
+          Your password must be at least 8 characters
+        </div>
+        <br />
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+        >
+          <Link to={`/SignIn/where`} className={classes.toolbarItem}>
+            Sign Up
+          </Link>
+        </Button>
+      </Fragment>
+    );
+  }
+}
 
-export default withStyles(styles)(start);
+export default withStyles(styles)(signUp);
