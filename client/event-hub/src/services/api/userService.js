@@ -7,11 +7,15 @@ export default {
 			params:{userId}
 		})
 	},
-	updateUserInfo: function(){
+	updateUserInfo: function(userInfo){
 		//will return updated result
-		return api().update('',{
+		api().patch('',{
+			userInfo
+		}).then(function(response){
 
-		})
+		}).then(function(error){
+
+		});
 	},
 	getUserId: function(username){
 		return api().get('',{

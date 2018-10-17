@@ -35,6 +35,10 @@ module.exports={
 	getEvent:async function(req, res){
 		const infoPart = req.body;
 		eventService.getEvent(infoPart, res);
+	},
+	deleteEvent: async function(req, res){
+		const infoPart = req.body;
+		eventService.deleteEvent(infoPart, res);
 	}
 
 }

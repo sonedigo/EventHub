@@ -13,13 +13,22 @@ module.exports={
 		let queryPart = req.body;
 		groupService.createGroup(queryPart, res);
 	},
-	checkDuplicate:async function(req, res){
+	checkDuplicateEmail:async function(req, res){
 		let email = req.body.email;
-		let whetherDuplicate = await authenticateService.checkDuplicate(email);
+		let whetherDuplicate = await authenticateService.checkDuplicateEmail(email);
 		if(whetherDuplicate){
 			res.status(400).send({duplicate: true});
 		}else {
 			res.status(200).send({duplicate: false});
 		}
 	},
+	checkDuplicateUsername:async function(req, res){
+		let username = req.body.username;
+		let WhetherDuplicate = await authenticateService.checkDuplicateUsername(username);
+		if(WhetherDuplicate){
+			res.status(400).send({duplicate: true });
+		}else {
+			res.status(200).send({duplicate: false });
+		}
+	}
 }
