@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default {
   start: async function(credentials) {
-    await axios
+     axios
       .post("https://jsonplaceholder.typicode.com/posts", credentials)
       .then(res => {
         console.log(res);
@@ -13,7 +13,7 @@ export default {
       });
   },
   logIn: async function(credentials) {
-    await axios
+     axios
       .post("https://jsonplaceholder.typicode.com/posts", credentials)
       .then(res => {
         console.log(res);
@@ -23,7 +23,7 @@ export default {
       });
   },
   signUp: async function(credentials) {
-    await axios
+     axios
       .post("https://jsonplaceholder.typicode.com/posts", credentials)
       .then(res => {
         console.log(res);
