@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import FooterItems from "./footerItems/footerItems";
-import FooterItem from "./footerItems/footerItem/footerItem";
+import FooterItems from "./footerItems/homeFooterItems";
+import FooterItem from "./footerItems/footerItem/homeFooterItem";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({

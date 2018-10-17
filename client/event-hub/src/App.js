@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
-import Layout from "./containers/layout";
+import Footer from "./containers/footerLayout";
+import SignIn from "./containers/signInLayout";
 import { Switch, Route } from "react-router-dom";
 
 class App extends Component {
@@ -10,9 +10,9 @@ class App extends Component {
       <div className="App">
         <Header />
         <Switch>
-          <Route path="/SignIn" component={Layout} />
+          <Route path="/SignIn" component={SignIn} />
         </Switch>
-        <Footer />
+        <Route path="/" component={Footer} />
       </div>
     );
   }

@@ -23,6 +23,9 @@ const styles = theme => ({
     color: "#ff3333",
     fontSize: "60px",
     margin: "30px 0 10px 0"
+  },
+  height: {
+    height: "50px"
   }
 });
 const icon1 = props => {
@@ -34,6 +37,7 @@ const icon1 = props => {
       <div className={classes.subTitle}>
         Enter your email to sign up or log in.
       </div>
+      <div className={classes.height} />
     </div>
   );
 };

@@ -37,6 +37,9 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       width: "290px"
     }
+  },
+  height: {
+    height: "220px"
   }
 });
 
@@ -69,7 +72,7 @@ class start extends Component {
       SignUpOrLogIn = "SignUp";
     }
     return (
-      <Fragment>
+      <div>
         <TextField
           id="outlined-email-input"
           label="Enter email"
@@ -94,7 +97,8 @@ class start extends Component {
             Get Started
           </Link>
         </Button>
-      </Fragment>
+        <div className={classes.height} />
+      </div>
     );
   }
 }
