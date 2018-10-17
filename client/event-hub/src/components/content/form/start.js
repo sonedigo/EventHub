@@ -18,6 +18,7 @@ const styles = theme => ({
   button: {
     backgroundColor: "#ff3333",
     width: "350px",
+    textTransform: "none",
     [theme.breakpoints.down("sm")]: {
       width: "300px"
     },
@@ -27,7 +28,15 @@ const styles = theme => ({
   },
   toolbarItem: {
     textDecoration: "none",
-    color: "white"
+    color: "white",
+    width: "350px",
+    display: "block",
+    [theme.breakpoints.down("sm")]: {
+      width: "300px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "290px"
+    }
   }
 });
 

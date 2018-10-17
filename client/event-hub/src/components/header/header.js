@@ -9,6 +9,9 @@ const styles = theme => ({
     backgroundColor: "white",
     boxShadow: "none"
   },
+  button: {
+    textTransform: "none"
+  },
   toolbarTitle: {
     flex: 1
   },
@@ -44,20 +47,20 @@ const header = props => {
             </Link>
           </Typography>
           <div>
-            <Button href="/">Browse Events</Button>
-            <Button href="/">Organize</Button>
-            <Button href="/">Help</Button>
-            <Button href="/" color="secondary">
+            <Button href="/" className={classes.button}>
+              Browse Events
+            </Button>
+            <Button href="/" className={classes.button}>
+              Organize
+            </Button>
+            <Button href="/" className={classes.button}>
+              Help
+            </Button>
+            <Button href="/" color="secondary" className={classes.button}>
               Create Event
             </Button>
-            <Button>
-              <Link
-                to={{
-                  pathname: "/SignIn/",
-                  search: "?referrer=%2F"
-                }}
-                className={classes.toolbarItem}
-              >
+            <Button className={classes.button}>
+              <Link to={"/SignIn"} className={classes.toolbarItem}>
                 Sign In
               </Link>
             </Button>

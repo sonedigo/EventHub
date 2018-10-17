@@ -6,16 +6,36 @@ import SignInServices from "../../../services/api/signInServices";
 
 const styles = theme => ({
   textField: {
-    width: "350px"
+    width: "350px",
+    [theme.breakpoints.down("sm")]: {
+      width: "330px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "290px"
+    }
   },
   button: {
     backgroundColor: "#ff3333",
     width: "350px",
-    margin: "10px 0"
+    margin: "10px 0",
+    textTransform: "none",
+    [theme.breakpoints.down("sm")]: {
+      width: "330px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "290px"
+    }
   },
   toolbarItem: {
     textDecoration: "none",
-    color: "white"
+    color: "white",
+    width: "350px",
+    [theme.breakpoints.down("sm")]: {
+      width: "330px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "290px"
+    }
   },
   remarkItem: {
     textDecoration: "none",

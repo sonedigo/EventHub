@@ -21,6 +21,7 @@ const styles = theme => ({
     backgroundColor: "#ff3333",
     width: "350px",
     margin: "10px 0",
+    textTransform: "none",
     [theme.breakpoints.down("sm")]: {
       width: "430px"
     },
@@ -31,7 +32,14 @@ const styles = theme => ({
   toolbarItem: {
     textDecoration: "none",
     color: "white",
-    fontWeight: "normal"
+    fontWeight: "normal",
+    width: "350px",
+    [theme.breakpoints.down("sm")]: {
+      width: "430px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "290px"
+    }
   },
   remarkItem: {
     textDecoration: "none",
