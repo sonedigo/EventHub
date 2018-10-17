@@ -14,6 +14,10 @@ module.exports = (app) => {
 
   app.get('/getuser', QueryController.getUser); //
   app.get('/getgroup', QueryController.getGroup);
+
+  app.get('/user/getuserinfo', CRUDController.getUserInfo);
+  app.get('/user/getuserid', CRUDController.getUserId);
+  
   app.get('/login', LoginController.login);
   app.get('/check/email_duplicate', RegisterController.checkDuplicateEmail);
   app.get('/check/username_duplicate', RegisterController.checkDuplicateUsername);
@@ -22,6 +26,7 @@ module.exports = (app) => {
 
   app.patch('/patch/userinfo', CRUDController.updateUserInfo); //
   app.patch('/patch/eventinfo'EventController.updateEvent);
+  app.patch('/user/updateuserinfo', CRUDController.updateUserInfo);
 
   app.delete('/event/delete', EventController.deleteEvent); //
  
