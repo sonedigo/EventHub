@@ -1,4 +1,4 @@
-import Api from "../api";
+import api from "../api";
 import axios from "axios";
 
 export default {
@@ -31,5 +31,12 @@ export default {
       .catch(err => {
         console.log(err);
       });
+  },
+  login: function(username, password){
+    //will return whether user can login in: true or false;
+    return api().get('',{
+      params:{username, password}
+    });
   }
+
 };
