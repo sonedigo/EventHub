@@ -34,7 +34,7 @@ export default {
   },
   login: function(username, password){
     //will return whether user can login in: true or false;
-    return api().get('',{
+    return api().get('/login',{
       params:{username, password}
     });
   }

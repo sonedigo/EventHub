@@ -12,8 +12,8 @@ module.exports = (app) => {
   app.post('/user/create_event', EventController.userCreateEvent);
   app.post('/group/create_event', EventController.groupCreateEvent);
 
-  app.get('/getuser', QueryController.getUser); //
-  app.get('/getgroup', QueryController.getGroup);
+  app.get('/admin/getuser', QueryController.getUser); //
+  app.get('/admin/getgroup', QueryController.getGroup);
 
   app.get('/user/getuserinfo', CRUDController.getUserInfo);
   app.get('/user/getuserid', CRUDController.getUserId);

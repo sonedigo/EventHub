@@ -6,9 +6,9 @@ const groupHelper = require('./helper/groupHelper');
 module.exports={
 	createGroup: async function(req, res){
 		const groupId = await groupHelper.createGroupId();
-		const groupInfo = await groupHelper.createGroupInfo();
+		const groupInfo = await groupHelper.createGroupInfo(req, groupId);
 		const groupCreater = await mysqlPromise.then(function(connection){
-			const queryCommand = 'INSERT INTO Groups() VALUES()'
+			const queryCommand = 'INSERT INTO userGroups(groupId, groupName, email, phone, password) VALUES(?, ?, ?, ?, ?)';
 			return connection.query(queryCommand, groupInfo)
 		}).then(function(results){
 			res.status(200).send({
@@ -16,17 +16,36 @@ module.exports={
 				description:"Create Group Succee"
 			})
 		}).catch(function(error){
-			res.status(400).send("The error is:"+error);
+			console.log(error);
+			res.status(400).send({
+				groupCreated: false,
+				description: error
+			});
 		});
 	},
-	updateGroupInfo: async function(){
-
-	},
-	updateEvent:async function() {
-
+	updateGroupInfo: async function(req, res){
+		const groupId = req.groupId;
+		const groupInfo_array = await groupHelper.groupInfo_array(req);
+		const Command = 'UPDATE';
+		const Result =await mysqlPromise.then(function(connection){
+			return connection.query(Command, groupInfo_array);
+		}).then(function(results){
+			res.status(200).send({
+				groupUpdated: true,
+				description:"Update Group Succee"
+			})
+		}).catch(function(error){
+			console.log(error);
+			res.status(400).send({
+				groupUpdated: false,
+				description: error
+			})
+		})
 	},
 	createUserForGroup:async function(req, res) {
 		let groupId = req.groupId;
-		userService.createUser
+		let userId = await userService.createUser(req, res);
+		let relationId = await relationService.createGroupUserRelation(groupId, userId);
+		return relationId;
 	}
 }
