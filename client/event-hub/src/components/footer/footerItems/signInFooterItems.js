@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import Select from "../../select/footerSelect";
 
 const styles = theme => ({
   container: {
@@ -35,7 +36,7 @@ const footerItems = props => {
     <div className={classes.container}>
       <div className={classes.left}>© 2018 Eventbrite</div>
       <div className={classes.center}>{props.children}</div>
-      <div className={classes.right}>© 2018 Eventbrite</div>
+      <Select className={classes.right} />
     </div>
   );
 };
