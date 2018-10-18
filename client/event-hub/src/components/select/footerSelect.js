@@ -2,9 +2,6 @@ import React, { Fragment } from "react";
 import { Icon } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
-  container: {
-    padding: " 0 2%"
-  },
   select: {
     display: "block",
     WebkitAppearance: "none",
@@ -18,7 +15,7 @@ const styles = theme => ({
   },
   icon: {
     fontSize: "20px",
-    padding: "6px 0 0 0"
+    padding: "6px 2% 0 0"
   }
 });
 const footSelect = props => {

@@ -6,7 +6,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
-    position: "relative",
+    position: "absolute",
+    width: "100%",
     background: "#1e0a3c",
     color: "#dbdae3",
     padding: "28px",
