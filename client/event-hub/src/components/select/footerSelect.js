@@ -7,7 +7,7 @@ const styles = theme => ({
     WebkitAppearance: "none",
     border: "0",
     borderRadius: "2px",
-    padding: "8px 9px 12px -1px",
+    padding: "8px 9px 12px 0px",
     backgroundColor: "inherit",
     color: "inherit",
     outline: "none",
@@ -15,7 +15,7 @@ const styles = theme => ({
   },
   icon: {
     fontSize: "20px",
-    padding: "4px 0 0 0"
+    padding: "6px 0 0 0"
   }
 });
 const footSelect = props => {
