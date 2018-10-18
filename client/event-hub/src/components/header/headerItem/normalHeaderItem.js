@@ -3,21 +3,21 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   item: {
+    display: "inline-block",
     padding: "0 5px",
     color: "#dbdae3",
     listStyle: "none"
   },
   footerLink: {
     textDecoration: "none",
-    color: "#dbdae3",
-    fontSize: "11px",
+    color: "#6f7287",
+    fontSize: "15px",
     "&:hover": {
-      textDecoration: "underline",
-      color: "#3659e3"
+      color: "black"
     }
   }
 });
-const footerItem = props => {
+const headerItem1 = props => {
   const { classes } = props;
   return (
     <li className={classes.item}>
@@ -28,4 +28,4 @@ const footerItem = props => {
   );
 };
 
-export default withStyles(styles)(footerItem);
+export default withStyles(styles)(headerItem1);

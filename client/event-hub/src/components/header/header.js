@@ -1,7 +1,9 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import HeaderItem from "./headerItem/normalHeaderItem";
+import DropItem from "./headerItem/dropHeaderItem";
 
 const styles = theme => ({
   appBar: {
@@ -19,15 +21,26 @@ const styles = theme => ({
     textDecoration: "none",
     color: "Green"
   },
-  toolbarLink: {
-    justifyContent: "flex-end"
-  },
   underline: {
-    color: "#4b4d63"
+    height: "1px",
+    backgroundColor: "#eeedf2",
+    border: "none"
   },
   toolbarItem: {
     textDecoration: "none",
-    color: "rgba(0, 0, 0, 0.87)"
+    color: "#6f7287",
+    "&:hover": {
+      color: "black"
+    }
+  },
+  active: {
+    color: "#3D64FF",
+    fontWeight: "bold"
+  },
+  itemContainer: {
+    display: "flex",
+    flex: "0.6",
+    justifyContent: "space-around"
   }
 });
 
@@ -46,28 +59,22 @@ const header = props => {
               Eventhub
             </Link>
           </Typography>
-          <div>
-            <Button href="/" className={classes.button}>
-              Browse Events
-            </Button>
-            <Button href="/" className={classes.button}>
-              Organize
-            </Button>
-            <Button href="/" className={classes.button}>
-              Help
-            </Button>
-            <Button href="/" color="secondary" className={classes.button}>
-              Create Event
-            </Button>
-            <Button className={classes.button}>
+          <div className={classes.itemContainer}>
+            <HeaderItem href="/"> Browse Events</HeaderItem>
+            <DropItem> Organize </DropItem>
+            <DropItem> Help </DropItem>
+            <HeaderItem href="/">
+              <span className={classes.active}>Create Event</span>
+            </HeaderItem>
+            <HeaderItem>
               <Link to={"/SignIn"} className={classes.toolbarItem}>
                 Sign In
               </Link>
-            </Button>
+            </HeaderItem>
           </div>
         </Toolbar>
       </AppBar>
-      <hr className />
+      <hr className={classes.underline} />
     </React.Fragment>
   );
 };
