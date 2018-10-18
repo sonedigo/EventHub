@@ -1,8 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
 import { Icon } from "@material-ui/core";
+
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
+  wrapper: {},
+  header: {},
+  headerTitle: {},
+  list: {},
+  listItem: {},
   item: {
     display: "inline-block",
     padding: "0 5px",
@@ -10,7 +16,6 @@ const styles = theme => ({
     listStyle: "none"
   },
   footerLink: {
-    textDecoration: "none",
     color: "#6f7287",
     fontSize: "15px",
     "&:hover": {
@@ -22,16 +27,31 @@ const styles = theme => ({
     margin: "0 0 -5px 0"
   }
 });
-const headerItem2 = props => {
-  const { classes } = props;
-  return (
-    <li className={classes.item}>
-      <a href="/" className={classes.footerLink}>
-        {props.children}
-        <Icon className={classes.icon}>keyboard_arrow_down</Icon>
-      </a>
-    </li>
-  );
-};
+class headerItem2 extends Component {
+  state = {
+    listOpen: false,
+    headerTitle: this.props.title
+  };
+
+  toggleList = () => {
+    this.setState(prevState => {
+      listOpen: !prevState.listOpen;
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+    const { list } = this.props;
+    const { listOpen, headerTitle } = this.state;
+    return (
+      <li className={classes.item}>
+        <a href="/" className={classes.footerLink}>
+          {this.props.children}
+          <Icon className={classes.icon}>keyboard_arrow_down</Icon>
+        </a>
+      </li>
+    );
+  }
+}
 
 export default withStyles(styles)(headerItem2);

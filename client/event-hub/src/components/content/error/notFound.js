@@ -1,6 +1,7 @@
 import React from "react";
 import { Icon } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import OrganizeMenu from "../menu/headerMenu/organizeMenu";
 
 const styles = theme => ({
   container: {
@@ -38,6 +39,7 @@ const errorIcon = props => {
   const { classes } = props;
   return (
     <div className={classes.container}>
+      <OrganizeMenu />
       <Icon className={classes.icon}>mood_bad</Icon>
       <div className={classes.title}>404 Not Found</div>
       <div className={classes.subTitle}>That page doesn't exist.</div>
