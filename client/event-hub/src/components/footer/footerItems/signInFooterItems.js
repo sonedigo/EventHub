@@ -6,14 +6,15 @@ const styles = theme => ({
   container: {
     display: "flex",
     flexFlow: "row wrap",
-    padding: "28px"
+    padding: "28px 0 14px 0"
   },
   left: {
     flexFlow: "row wrap",
-    flex: 1,
+    flex: 0.9,
     alignItems: "center",
     fontSize: "11px",
-    color: "#6f7287"
+    color: "#6f7287",
+    padding: "0 2%"
   },
   center: {
     display: "flex",
@@ -26,7 +27,7 @@ const styles = theme => ({
     flex: 1,
     alignItems: "center",
     fontSize: "10px",
-    textAlign: "right"
+    padding: "0 10%"
   }
 });
 
@@ -36,6 +37,7 @@ const footerItems = props => {
     <div className={classes.container}>
       <div className={classes.left}>© 2018 Eventbrite</div>
       <div className={classes.center}>{props.children}</div>
+
       <Select className={classes.right} />
     </div>
   );

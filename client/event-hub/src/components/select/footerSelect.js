@@ -2,6 +2,9 @@ import React, { Fragment } from "react";
 import { Icon } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
+  container: {
+    padding: " 0 2%"
+  },
   select: {
     display: "block",
     WebkitAppearance: "none",
