@@ -33,7 +33,7 @@ create table Events(
 );
 
 create table GroupUsersRelation(
-	relationId int PRIMARY KEY,
+	relationId int PRIMARY KEY AUTO_INCREMENT,
 	groupId int,
 	userId int
 );

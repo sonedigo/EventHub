@@ -2,19 +2,22 @@ import api from '../api'
 
 export default {
 	getUserInfo: function(userId){
-
-		return api().get('',{
+		return api().get('/user/getuserid',{
 			params:{userId}
 		})
 	},
-	updateUserInfo: function(){
+	updateUserInfo: function(userInfo){
 		//will return updated result
-		return api().update('',{
+		api().patch('/user/updateuserinfo',{
+			userInfo
+		}).then(function(response){
 
-		})
+		}).then(function(error){
+
+		});
 	},
 	getUserId: function(username){
-		return api().get('',{
+		return api().get('/user/getuserid',{
 			params:{username}
 		})
 	}

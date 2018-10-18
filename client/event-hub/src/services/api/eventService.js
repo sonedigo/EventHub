@@ -1,20 +1,45 @@
 import api from '../api'
 
 export default {
-	createEvent: function(EventInfo){
-		return api().post('',{
-
+	userCreateEvent: function(EventInfo, Id){
+		api().post('/user/create_event',{
+			EventInfo,Id
+		}).then(function(response){
+			console.log(response);
+		}).then(function(error){
+			console.log(error);
 		});
 	},
-	updateEvent: function(EventInfo){
-		return api().update();
-	},
-	getEvent: function(EventId){
-		return api().get('',{
-			params:{EventId};
+	groupCreateEvent: function(EventInfo, Id){
+		api().post('/group/create_event',{
+			EventInfo,Id
+		}).then(function(response){
+			console.log(response);
+		}).then(function(error){
+			console.log(error);
 		})
 	},
+	updateEvent: function(EventInfo){
+		api().patch('/patch/eventinfo',{
+			EventInfo
+		}).then(function(response){
+			console.log(response);
+		}).then(function(error){
+			console.log(error);
+		});
+	},
+	getEvent: function(EventId){
+		return api().get('/event/getevent',{
+			params:{EventId};
+		});
+	},
 	deleteEvent: function(EventId){
-		return api();
+		api().delete('/event/detele',{
+			EventId
+		}).then(function(response){
+			console.log(response);
+		}).then(function(error){
+			console.log(error);
+		});
 	}
 }

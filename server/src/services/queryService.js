@@ -15,7 +15,16 @@ module.exports={
 		});
 	},
 	getGroup:async function(req, res){
-
+		const groupId = req.query.groupId;
+		const command = 'SELECT * AS groupInfo FROM users WHERE groupId = ?';
+		const Result = mysqlPromise.then(function(connection){
+			return connection.query(command, groupId);
+		}).then(function(results){
+			res.status(200).send(results[0].groupInfo);
+		}).catch(function(error){
+			console.log(error);
+			res.status(400).send(error);
+		})
 	},
 	insertData(req,res){
 		console.log('Insert operation is below:');

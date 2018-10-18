@@ -5,6 +5,8 @@ const authenticateService = require('./authenticateService');
 const _ = require('lodash');
 
 module.exports.createUser= async function(req, res){
+	res.send(req);
+	/*
 	let userId = await userHelper.createUserId();
 	let userInfo = await userHelper.createUserInfo(req, userId);
 	let checkRegisterRole = await authenticateService.checkRegisterRole(req.role);
@@ -35,6 +37,7 @@ module.exports.createUser= async function(req, res){
 			});
 		}	
 	}
+	*/
 }
 
 module.exports.getUserInfo_byItself=async function(req, res){

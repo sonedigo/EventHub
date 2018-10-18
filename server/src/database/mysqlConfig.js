@@ -6,7 +6,7 @@ const password = process.env.sqlPassword;
 const setting = {
 	host: 'localhost',
 	user: 'sonedigo',
-	password: password,
+	password: 'sone896454',
 	database: 'EventHub'
 };
 
