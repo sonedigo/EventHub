@@ -3,10 +3,11 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   listContainer: {
     position: "absolute",
-    top: "49px",
+    top: "52px",
     right: "309px",
     zIndex: "1000",
-    boxShadow: ""
+    paddingInlineStart: "0",
+    boxShadow: "0 1px 17px 0 rgba(40,44,53,.1), 0 2px 4px 0 rgba(40,44,53,.1)"
   },
   listItem: {
     display: "block",
