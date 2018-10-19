@@ -2,20 +2,18 @@ import React, { Component } from "react";
 import { Icon } from "@material-ui/core";
 
 import { withStyles } from "@material-ui/core/styles";
+import { nominalTypeHack } from "prop-types";
 
 const styles = theme => ({
-  wrapper: {},
-  header: {},
-  headerTitle: {},
-  list: {},
-  listItem: {},
   item: {
-    display: "inline-block",
-    padding: "0 5px",
-    color: "#dbdae3",
-    listStyle: "none"
+    display: "flex",
+    padding: "24px 19px",
+    alignItems: "center"
+    // backgroundColor: "#f8f7fa",
+    // border: "1px solid black"
   },
   footerLink: {
+    textDecoration: "none",
     color: "#6f7287",
     fontSize: "15px",
     "&:hover": {
@@ -44,12 +42,12 @@ class headerItem2 extends Component {
     const { list } = this.props;
     const { listOpen, headerTitle } = this.state;
     return (
-      <li className={classes.item}>
+      <div className={classes.item}>
         <a href="/" className={classes.footerLink}>
           {this.props.children}
           <Icon className={classes.icon}>keyboard_arrow_down</Icon>
         </a>
-      </li>
+      </div>
     );
   }
 }

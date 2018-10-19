@@ -3,10 +3,11 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   item: {
-    display: "inline-block",
-    padding: "0 5px",
-    color: "#dbdae3",
-    listStyle: "none"
+    display: "flex",
+    padding: "24px 19px",
+    alignItems: "center"
+    // backgroundColor: "#f8f7fa",
+    // border: "1px solid black"
   },
   footerLink: {
     textDecoration: "none",
@@ -20,11 +21,11 @@ const styles = theme => ({
 const headerItem1 = props => {
   const { classes } = props;
   return (
-    <li className={classes.item}>
+    <div className={classes.item}>
       <a href="/" className={classes.footerLink}>
         {props.children}
       </a>
-    </li>
+    </div>
   );
 };
 
