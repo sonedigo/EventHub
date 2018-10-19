@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import HeaderItem from "./headerItem/normalHeaderItem";
-import OrganizeDropItem from "../content/menu/headerMenu/organizeMenu";
+import OrganizeDropItem from "../header/headerItem/dropHeaderItem";
 
 const styles = theme => ({
   appBar: {
@@ -14,6 +14,7 @@ const styles = theme => ({
   button: {
     textTransform: "none"
   },
+  toolbar: { paddingRight: "0" },
   toolbarTitle: {
     flex: 1
   },
@@ -24,7 +25,8 @@ const styles = theme => ({
   underline: {
     height: "1px",
     backgroundColor: "#eeedf2",
-    border: "none"
+    border: "none",
+    margin: "0"
   },
   toolbarItem: {
     textDecoration: "none",
@@ -39,8 +41,8 @@ const styles = theme => ({
   },
   itemContainer: {
     display: "flex",
-    flex: "0.6",
-    justifyContent: "space-around"
+    flex: "0.8",
+    justifyContent: "flex-end"
   }
 });
 
@@ -49,7 +51,7 @@ const header = props => {
   return (
     <React.Fragment>
       <AppBar position="static" color="default" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <Typography
             variant="title"
             color="inherit"
@@ -61,12 +63,8 @@ const header = props => {
           </Typography>
           <div className={classes.itemContainer}>
             <HeaderItem href="/"> Browse Events</HeaderItem>
-            <HeaderItem href="/">
-              <span className={classes.active}>Create Event</span>
-            </HeaderItem>
-            <HeaderItem href="/">
-              <span className={classes.active}>Create Event</span>
-            </HeaderItem>
+            <OrganizeDropItem>Organize</OrganizeDropItem>
+            <OrganizeDropItem>Help</OrganizeDropItem>
             <HeaderItem href="/">
               <span className={classes.active}>Create Event</span>
             </HeaderItem>
