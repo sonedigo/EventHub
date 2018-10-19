@@ -2,11 +2,11 @@ const {mysqlConnection,mysqlPromise} = require('../database/mysqlConfig');
 const userHelper = require('./helper/userHelper');
 const queryService = require('./queryService');
 const authenticateService = require('./authenticateService');
+const relationService = require('./relationService');
+const eventService = require('./eventService');
 const _ = require('lodash');
 
 module.exports.createUser= async function(req, res){
-	res.send(req);
-	/*
 	let userId = await userHelper.createUserId();
 	let userInfo = await userHelper.createUserInfo(req, userId);
 	let checkRegisterRole = await authenticateService.checkRegisterRole(req.role);
@@ -37,7 +37,7 @@ module.exports.createUser= async function(req, res){
 			});
 		}	
 	}
-	*/
+	return userId;
 }
 
 module.exports.getUserInfo_byItself=async function(req, res){
@@ -54,13 +54,20 @@ module.exports.updateUserInfo=async function(req, res){
 	});
 }
 module.exports.enrollGroup = async function(req, res){
-	let groupId = req.groupId;
-	let userId = req.userId;
-
+	let whetherSuccee = await relationService.createGroupUserRelation(req.groupId, req.userId);
+	if(whetherSuccee){
+		res.status(200).send({isEnrolled:true});
+	}else {
+		res.status(400).send({isEnrolled:false});
+	}
 }
 module.exports.exitGroup = async function(req, res){
-	let groupId = req.groupId;
-	let groupId = req.userId;
+	let whetherSuccee = await relationService.removeUserFromGroup(req.groupId, req.userId);
+	if(whetherSuccee){
+		res.status(200).send({isExited: true});
+	}else {
+		res.status(400).send({isExited: false});
+	}
 }
 module.exports.editEvent=async function(req, res){
 	let eventId = req.eventId;

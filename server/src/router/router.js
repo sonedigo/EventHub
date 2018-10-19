@@ -25,7 +25,7 @@ module.exports = (app) => {
 
 
   app.patch('/patch/userinfo', CRUDController.updateUserInfo); //
-  app.patch('/patch/eventinfo'EventController.updateEvent);
+  app.patch('/patch/eventinfo',EventController.updateEvent);
   app.patch('/user/updateuserinfo', CRUDController.updateUserInfo);
 
   app.delete('/event/delete', EventController.deleteEvent); //

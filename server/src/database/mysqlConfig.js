@@ -3,13 +3,13 @@ const faker = require('faker');
 const config = require('config');
 const mysql_Promise = require('promise-mysql');
 const password = process.env.sqlPassword;
-const setting = {
+let setting = {
 	host: 'localhost',
-	user: 'sonedigo',
-	password: 'sone896454',
-	database: 'EventHub'
+	user: 'eventAdmin',
+	password: password,
+	database: config.get('setting.database')
 };
-
+console.log(`Connecting to ${config.get('setting.database')}`);
 let mysqlConnection = mysql.createConnection(setting);
 
 let mysqlPromise = mysql_Promise.createConnection(setting);

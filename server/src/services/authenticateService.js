@@ -10,7 +10,7 @@ module.exports.encryptPassword= async function(password){
 module.exports.validUser = async function (username, password){
 		let passwordDB;
 		const queryCommand = "SELECT password from users where userName = ?";
-		const queryresult = await mysqlPromise.then(function(connection){
+		const queryresult = mysqlPromise.then(function(connection){
 			return connection.query(queryCommand, username);
 		}).then(function(results){
 			passwordDB = results[0].password;

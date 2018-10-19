@@ -1,0 +1,7 @@
+{
+    "setting":{
+  "host": "localhost",
+  "user": "eventAdmin",
+  "database": "EventHub_test"
+  }
+}

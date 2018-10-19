@@ -13,7 +13,7 @@ module.exports={
 		}).then(function(results){
 			res.status(200).send({
 				groupCreated: true,
-				description:"Create Group Succee"
+				description:"Create Group Success"
 			})
 		}).catch(function(error){
 			console.log(error);
@@ -32,7 +32,7 @@ module.exports={
 		}).then(function(results){
 			res.status(200).send({
 				groupUpdated: true,
-				description:"Update Group Succee"
+				description:"Update Group Success"
 			})
 		}).catch(function(error){
 			console.log(error);
@@ -47,5 +47,8 @@ module.exports={
 		let userId = await userService.createUser(req, res);
 		let relationId = await relationService.createGroupUserRelation(groupId, userId);
 		return relationId;
+	},
+	getGroupMembers: async function(req, res){
+
 	}
 }
