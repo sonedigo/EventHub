@@ -21,10 +21,10 @@ module.exports.assignRole=async function(userid){
 module.exports.getUserId = async function(username){
 	let userid;
 	const Command = 'SELECT userId AS userId FROM Users WHERE userName = ?';
-	const getuserId = await mysqlPromise.then(function(connection){
+	const userid = await mysqlPromise.then(function(connection){
 		return connection.query(Command, username);
 		}).then(function(result){
-			userid = result[0].userId;
+			return result[0].userId;
 	});
 		return userid;
 }
