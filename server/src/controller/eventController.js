@@ -4,13 +4,16 @@ const userService = require('../services/userService');
 const authenticateService = require('../services/authenticateService');
 const groupService = require('../services/groupService');
 const eventService = require('../services/eventService');
+const relationService = require('../services/relationService');
 
 module.exports={
 	userCreateEvent:async function(req, res){
 		const infoPart = req.body;
 		eventService.createEvent(infoPart, res).then(function(result){
-			eventService.createEventUserRelation(infoPart);
-		}).catch(function(error));
+			eventService.createEventUserRelation(infoPart, result);
+		}).catch(function(error){
+			console.log(error);
+		});
 	},
 	updateEvent:async function(req, res){
 		const infoPart = req.body;
@@ -24,8 +27,10 @@ module.exports={
 	groupCreateEvent:async function(req, res){
 			const infoPart = req.body;
 		eventService.createEvent(infoPart, res).then(function(result){
-			eventService.createEventGroupRelation(infoPart);
-		}).catch(function(error));
+			relationService.createEventGroupRelation(infoPart);
+		}).catch(function(error){
+			console.log(error);
+		});
 	},
 	groupDeleteEvent:async function(req, res){
 		const infoPart = req.body;

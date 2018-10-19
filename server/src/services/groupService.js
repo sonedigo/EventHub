@@ -47,5 +47,8 @@ module.exports={
 		let userId = await userService.createUser(req, res);
 		let relationId = await relationService.createGroupUserRelation(groupId, userId);
 		return relationId;
+	},
+	getGroupMembers: async function(req, res){
+
 	}
 }

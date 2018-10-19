@@ -5,8 +5,8 @@ const mysql_Promise = require('promise-mysql');
 const password = process.env.sqlPassword;
 const setting = {
 	host: 'localhost',
-	user: 'sonedigo',
-	password: 'sone896454',
+	user: 'eventAdmin',
+	password: password,
 	database: 'EventHub'
 };
 
