@@ -38,8 +38,16 @@ module.exports={
 		});
 		return whetherSuccess;
 	},
-	createUserRoleRelation:async function(objectId){
-
+	createUserRoleRelation:async function(userId, roleId){
+		const command = 'INSERT INTO UserRolesRelation(userId, roleId) VALUES(?,?)';
+		const whetherSuccess = await mysqlPromise.then(function(connection){
+			return connection.query(command, [userId, roleId]);
+		}).then(function(results){
+			return true;
+		}).catch(function(error){
+			console.log(error);
+		});
+		return whetherSuccess;
 	},
 	removeUserFromGroup:async function(groupId, userId){
 		const Command = 'DELETE * FROM GroupUsersRelation WHERE groupId =? AND userId =?';

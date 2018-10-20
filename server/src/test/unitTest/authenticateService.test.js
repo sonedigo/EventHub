@@ -1,6 +1,6 @@
 const authenticateService = require('../../services/authenticateService');
 const bcrypt = require('bcrypt');
-
+//Should change environment to test database for test
 describe('Authenticate Service Test', ()=>{
 
 	it('should be vaild login',async function(){

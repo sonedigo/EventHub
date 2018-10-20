@@ -10,5 +10,6 @@ module.exports={
 			req.sponsor,
 			req.sponsorPhone,
 			];
+			return event;
 	}
 }
