@@ -1,19 +1,22 @@
 const {mysqlConnection, mysqlPromise} = require('../../database/mysqlConfig');
 
 module.exports.assignRole=async function(userid){
-	let roleId;
-	let role;
 	const CommandRoleId = 'SELECT roleId FROM UserRoles WHERE userId = ?';
-	const getRoleId = await mysqlPromise.then(function(connection){
+	const roleId = await mysqlPromise.then(function(connection){
 		return connection.query(CommandRoleId, userid);
 	}).then(function(result){
-		roleId = result[0].roleId;
+		return result[0].roleId;
+	}).catch(function(error){
+		console.log(error);
 	})
+
 	const CommandRole = 'SELECT Role from Roles WHERE roleId = ?';
-	const getRole = await mysqlPromise.then(function(connection){
+	const role = await mysqlPromise.then(function(connection){
 		return connection.query(CommandRole, roleId);
 	}).then(function(result){
-		role = result[0].Role;
+		return result[0].Role;
+	}).catch(function(error){
+		console.log(error);
 	});
 	return role;
 }
@@ -25,6 +28,8 @@ module.exports.getUserId = async function(username){
 		return connection.query(Command, username);
 		}).then(function(result){
 			return result[0].userId;
+	}).catch(function(error){
+		console.log(error);
 	});
 		return userid;
 }

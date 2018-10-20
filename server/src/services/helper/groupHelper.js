@@ -9,6 +9,8 @@ module.exports={
 			return connection.query(queryCommand);
 		}).then(function(results){
 			groupId = groupIdResult(results[0].num_of_group);
+		}).catch(function(error){
+			console.log(error);
 		})
 		return groupId;
 	},
