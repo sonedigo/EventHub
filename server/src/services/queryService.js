@@ -3,9 +3,9 @@ const faker = require('faker');
 
 
 module.exports={
-	getUser:async function(req, res){
+	getUserInfo:async function(req, res){
 		const userId = req.query.userId;
-		mysqlConnection.query('SELECT * FROM users WHERE userId = ?',userId, function(error, results, fields){
+		mysqlConnection.query('SELECT * FROM Users WHERE userId = ?',userId, function(error, results, fields){
 			if(error) {
 				throw error;
 				res.status(400).send(error);
@@ -14,9 +14,9 @@ module.exports={
 			console.log(results[0])
 		});
 	},
-	getGroup:async function(req, res){
+	getGroupInfo:async function(req, res){
 		const groupId = req.query.groupId;
-		const command = 'SELECT * AS groupInfo FROM users WHERE groupId = ?';
+		const command = 'SELECT * AS groupInfo FROM userGroups WHERE groupId = ?';
 		const Result = mysqlPromise.then(function(connection){
 			return connection.query(command, groupId);
 		}).then(function(results){

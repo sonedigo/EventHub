@@ -8,16 +8,16 @@ module.exports.encryptPassword= async function(password){
 }
 
 module.exports.validUser = async function (username, password){
-		let passwordDB;
-		const queryCommand = "SELECT password from users where userName = ?";
-		const queryresult = mysqlPromise.then(function(connection){
+		
+		const queryCommand = "SELECT password FROM Users WHERE userName = ?";
+		const passwordDB = await mysqlPromise.then(function(connection){
 			return connection.query(queryCommand, username);
 		}).then(function(results){
-			passwordDB = results[0].password;
+			return results[0].password;
 		}).catch(function(error){
 			console.log(error);
 		})
-		const WhetherPass = await bcrypt.compare(password, passwordDB);
+		let WhetherPass = await bcrypt.compare(password, passwordDB);
 		return WhetherPass;
 }
 

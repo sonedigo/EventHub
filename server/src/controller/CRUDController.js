@@ -7,7 +7,7 @@ const adminService = require('../services/adminService');
 
 module.exports={
 	getUserInfo(req, res){
-
+		queryService.getUserInfo(req, res);
 	},
 	getUserId(req, res){
 
