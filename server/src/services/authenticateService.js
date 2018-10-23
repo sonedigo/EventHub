@@ -8,36 +8,48 @@ module.exports.encryptPassword= async function(password){
 }
 
 module.exports.validUser = async function (username, password){
-		let passwordDB;
-		const queryCommand = "SELECT password from users where userName = ?";
-		const queryresult = mysqlPromise.then(function(connection){
+		
+		const queryCommand = "SELECT password FROM Users WHERE userName = ?";
+		const passwordDB = await mysqlPromise.then(function(connection){
 			return connection.query(queryCommand, username);
 		}).then(function(results){
-			passwordDB = results[0].password;
+			return results[0].password;
+		}).catch(function(error){
+			console.log(error);
 		})
-		const WhetherPass = await bcrypt.compare(password, passwordDB);
+		let WhetherPass = await bcrypt.compare(password, passwordDB);
 		return WhetherPass;
 }
 
-module.exports.checkDuplicateEmail = async function(email){
+module.exports.isDuplicatedEmail = async function(email){
 		let functionReturn;	
-		const queryCommand = 'SELECT COUNT(email) AS duplicateResult FROM Users WHERE email = ?'
+		const queryCommand = 'SELECT COUNT(email) AS duplicateResult FROM Users WHERE email = ?';
 		const queryresult = await mysqlPromise.then(function(connection){
 			return connection.query(queryCommand, [email]);
 		}).then(function(results){
 			functionReturn = results[0].duplicateResult;
+			if(functionReturn!=0)return true;
+		else return false;
+		}).catch(function(error){
+			console.log(error);
 		});
-		return functionReturn;
+		return queryresult;
+		
 }
-module.exports.checkDuplicateUsername = async function(username){
+module.exports.isDuplicatedUsername = async function(username){
 	let functionReturn;	
 		const queryCommand = 'SELECT COUNT(userName) AS duplicateResult FROM Users WHERE userName = ?'
 		const queryresult = await mysqlPromise.then(function(connection){
 			return connection.query(queryCommand, [username]);
 		}).then(function(results){
 			functionReturn = results[0].duplicateResult;
+			if(functionReturn!=0)return true;
+		else return false;
+		}).catch(function(error){
+			console.log(error);
 		});
-		return functionReturn;
+		return queryresult;
+		
 }
 module.exports.checkRegisterRole= async function(roleId){
 	if(roleId === 1 || roleId ==2 )return true;

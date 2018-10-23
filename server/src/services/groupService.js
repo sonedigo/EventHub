@@ -19,7 +19,7 @@ module.exports={
 			console.log(error);
 			res.status(400).send({
 				groupCreated: false,
-				description: error
+				description: 'error in create group'
 			});
 		});
 	},
@@ -33,13 +33,13 @@ module.exports={
 			res.status(200).send({
 				groupUpdated: true,
 				description:"Update Group Success"
-			})
+			});
 		}).catch(function(error){
 			console.log(error);
 			res.status(400).send({
 				groupUpdated: false,
-				description: error
-			})
+				description: 'error in update group information'
+			});
 		})
 	},
 	createUserForGroup:async function(req, res) {
@@ -49,6 +49,15 @@ module.exports={
 		return relationId;
 	},
 	getGroupMembers: async function(req, res){
-
+		let groupId = req.groupId;
+		const command = 'SELECT userId AS users FROM GroupUsersRelation';
+		const userArray = await mysqlPromise.then(function(connection){
+			return connection.query(command, groupId);
+		}).then(function(results){
+			res.status(200).send(results[0].users);
+			return results[0].users;
+		}).catch(function(error){
+			console.log(error);
+		})
 	}
 }

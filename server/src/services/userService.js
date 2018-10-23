@@ -9,10 +9,11 @@ const _ = require('lodash');
 module.exports.createUser= async function(req, res){
 	let userId = await userHelper.createUserId();
 	let userInfo = await userHelper.createUserInfo(req, userId);
-	let checkRegisterRole = await authenticateService.checkRegisterRole(req.role);
-	let checkDuplicateEmail = await authenticateService.checkDuplicateEmail(userInfo.email);
-	let checkDuplicateUsername = await authenticateService.checkDuplicateUsername(userInfo.userName);
-	if(!(checkDuplicateEmail && checkDuplicateUsername)){
+	let roleId = await userHelper.getRoleId(req.role);
+	let checkRegisterRole = await authenticateService.checkRegisterRole(roleId);
+	let isDuplicatedEmail = await authenticateService.isDuplicatedEmail(req.email);
+	let isDuplicatedUsername = await authenticateService.isDuplicatedUsername(req.userName);
+	if((isDuplicatedEmail || isDuplicatedUsername)){
 		res.status(400).send({
 			error: 2,
 			description: 'duplicate Email or Username'

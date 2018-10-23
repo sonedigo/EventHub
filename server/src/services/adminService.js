@@ -1,6 +1,7 @@
 const {mysqlConnection, mysqlPromise} = require('../database/mysqlConfig');
 const userService = require('./userService');
 const groupService = require('./groupService');
+const eventService = require('./eventService');
 
 module.exports={
 	createGroup:async function(req, res) {
