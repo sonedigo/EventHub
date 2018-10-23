@@ -7,21 +7,22 @@ module.exports={
 	createGroup: async function(req, res){
 		const groupId = await groupHelper.createGroupId();
 		const groupInfo = await groupHelper.createGroupInfo(req, groupId);
-		const groupCreater = await mysqlPromise.then(function(connection){
+		const groupCreated = await mysqlPromise.then(function(connection){
 			const queryCommand = 'INSERT INTO userGroups(groupId, groupName, email, phone, password) VALUES(?, ?, ?, ?, ?)';
 			return connection.query(queryCommand, groupInfo)
 		}).then(function(results){
-			res.status(200).send({
+			return{
 				groupCreated: true,
 				description:"Create Group Success"
-			})
+			};
 		}).catch(function(error){
 			console.log(error);
-			res.status(400).send({
+			return {
 				groupCreated: false,
 				description: 'error in create group'
-			});
+			};
 		});
+		return {groupCreated, groupId};
 	},
 	updateGroupInfo: async function(req, res){
 		const groupId = req.groupId;
@@ -30,16 +31,16 @@ module.exports={
 		const Result =await mysqlPromise.then(function(connection){
 			return connection.query(Command, groupInfo_array);
 		}).then(function(results){
-			res.status(200).send({
+			return {
 				groupUpdated: true,
 				description:"Update Group Success"
-			});
+			};
 		}).catch(function(error){
 			console.log(error);
-			res.status(400).send({
+			return {
 				groupUpdated: false,
 				description: 'error in update group information'
-			});
+			};
 		})
 	},
 	createUserForGroup:async function(req, res) {
@@ -51,13 +52,20 @@ module.exports={
 	getGroupMembers: async function(req, res){
 		let groupId = req.groupId;
 		const command = 'SELECT userId AS users FROM GroupUsersRelation';
-		const userArray = await mysqlPromise.then(function(connection){
+		const queryResult = await mysqlPromise.then(function(connection){
 			return connection.query(command, groupId);
 		}).then(function(results){
-			res.status(200).send(results[0].users);
-			return results[0].users;
+			return {
+				isGot: true,
+				result:results[0].users
+			};
 		}).catch(function(error){
 			console.log(error);
-		})
+			return {
+				isGot: false,
+				result: error
+			}
+		});
+		return queryResult;
 	}
 }
