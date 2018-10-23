@@ -14,7 +14,9 @@ const styles = theme => ({
       width: "290px"
     }
   },
-
+  isValid: {
+    border: "1px solid red"
+  },
   button: {
     backgroundColor: "#ff3333",
     width: "350px",
@@ -50,11 +52,40 @@ class start extends Component {
   //   });
   // }
   state = {
-    email: ""
+    email: {
+      value: "",
+      validation: {
+        isrequired: true,
+        isEmail: true
+      },
+      valid: false,
+      touched: false
+    }
   };
+
+  checkValidality(value, rules) {
+    let isvalid = true;
+    if (!rules) {
+      return true;
+    }
+    if (rules.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
+    return isvalid;
+  }
   emailInputHandler = event => {
+    let updateEmail = { ...this.state.email };
+    (updateEmail.touch = true), (updateEmail.value = this.event.target.value);
+    updateEmail.valid = this.checkValidality(
+      updateEmail.value,
+      updateEmail.validation
+    );
     this.setState({
-      email: event.target.value
+      email: updateEmail
     });
   };
   emailPostHandler = () => {
