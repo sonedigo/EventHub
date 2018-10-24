@@ -5,12 +5,14 @@ module.exports={
 	createEvent: async function(req, res){
 		const event = await eventHelper.eventInfo_array(req);
 		const InsertCommand = 'INSERT INTO Events(eventTitle, description, date, location, sponsor, sponsorPhone) VALUES(?, ?, ?, ?, ?, ?)';
-		mysqlConnection.query(InsertCommand, event, function(error, results, fields){
+		const Result = await mysqlConnection.query(InsertCommand, event, function(error, results, fields){
 			if(error) {
+				return {isEventCreated:false};
 				res.status(400).send({isEventCreated:false});
 				throw error;
 			}
 			res.status(200).send({isEventCreated:true});
+			return {isEventCreated:true};
 		});
 	},
 	getEvent:async function(req, res){
@@ -31,7 +33,7 @@ module.exports={
 		mysqlPromise.then(function(connection){
 			return connection.query(Command, eventInfo);
 		}).then(function(results){
-			res.status(200).send({isEventUpdated: true, results});
+			res.status(200).send({isEventUpdated: true, results[]});
 		}).catch(function(error){
 			console.log(error);
 			res.status(400).send({isEventUpdated:false, error});
@@ -42,9 +44,11 @@ module.exports={
 		const Result = await mysqlPromise.then(function(connection){
 			return connection.query(Command, req.eventId);
 		}).then(function(results){
+			return true;
 		}).catch(function(error){
 			console.log(error);
 		});
+		return Result;
 	},
 }
 
