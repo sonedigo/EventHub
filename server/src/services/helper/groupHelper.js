@@ -32,6 +32,7 @@ module.exports={
 		request.email,
 		request.phone,
 		await authenticateService.encryptPassword(request.password),
+		request.groupId
 		];
 		return infoArray;
 	}

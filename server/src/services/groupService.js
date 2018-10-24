@@ -29,18 +29,18 @@ module.exports={
 	updateGroupInfo: async function(req, res){
 		const groupId = req.groupId;
 		const groupInfo_array = await groupHelper.groupInfo_array(req);
-		const Command = 'UPDATE';
-		const Result =await mysqlPromise.then(function(connection){
+		const Command = 'UPDATE userGroups SET groupName=?, phone=?, email=?, password=? WHERE groupId = ?';
+		const Result = await mysqlPromise.then(function(connection){
 			return connection.query(Command, groupInfo_array);
 		}).then(function(results){
 			return {
-				groupUpdated: true,
+				isUpdated: true,
 				description:"Update Group Success"
 			};
 		}).catch(function(error){
 			console.log(error);
 			return {
-				groupUpdated: false,
+				isUpdated: false,
 				description: 'error in update group information'
 			};
 		});

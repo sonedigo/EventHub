@@ -9,6 +9,7 @@ module.exports={
 			return true;
 		}).catch(function(error){
 			console.log(error);
+			return false;
 		})
 		return whetherSuccess;
 	},
@@ -22,6 +23,7 @@ module.exports={
 			return true;
 		}).catch(function(error){
 			console.log(error);
+			return false;
 		});
 		return whetherSuccess;
 	},
@@ -35,6 +37,7 @@ module.exports={
 			return true;
 		}).catch(function(error){
 			console.log(error);
+			return false;
 		});
 		return whetherSuccess;
 	},
@@ -46,6 +49,7 @@ module.exports={
 			return true;
 		}).catch(function(error){
 			console.log(error);
+			return false;
 		});
 		return whetherSuccess;
 	},
@@ -57,6 +61,7 @@ module.exports={
 			return true;
 		}).catch(function(error){
 			console.log(error);
+			return false;
 		});
 		return whetherSuccess;
 	},

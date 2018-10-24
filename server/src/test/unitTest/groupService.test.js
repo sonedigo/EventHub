@@ -1,4 +1,5 @@
 const groupService = require("../../services/groupService");
+const {mysqlConnection,mysqlPromise} = require("../../database/mysqlConfig");
 
 let groupInfo = {
 			groupName: "sadad",
@@ -6,7 +7,7 @@ let groupInfo = {
 			email:"sddd@gmail.com",
 			password:"123344"
 		};
-
+const groupId = 100000;
 console.log(groupInfo);
 
 describe("groupService Test", ()=>{
@@ -18,7 +19,12 @@ describe("groupService Test", ()=>{
 	});
 
 	it("Test updateGroupInfo",()=>{
-
+		const groupId = 100000;
+		const groupId_error = 200000;
+		let return_info = await groupService.updateGroupInfo(groupId);
+		let return_info_error = await groupService.updateGroupInfo(groupId_error);
+		expect(return_info.isUpdated).toBe(true);
+		expect(return_info.isUpdated).toBe(false);
 	});
 
 	it("Test createUserForGroup", ()=>{
@@ -26,7 +32,9 @@ describe("groupService Test", ()=>{
 	});
 
 	it("Test getGroupMembers", ()=>{
-
+		
+		const return_info = await groupService.getGroupMembers({groupId});
+		
 	});
 
 
