@@ -4,7 +4,7 @@ const groupHelper = require('./helper/groupHelper');
 
 
 module.exports={
-	createGroup: async function(req, res){
+	createGroup: async function(req){
 		const groupId = await groupHelper.createGroupId();
 		const groupInfo = await groupHelper.createGroupInfo(req, groupId);
 		const groupCreated = await mysqlPromise.then(function(connection){
@@ -12,13 +12,15 @@ module.exports={
 			return connection.query(queryCommand, groupInfo)
 		}).then(function(results){
 			return{
-				groupCreated: true,
+				isCreated: true,
+				isError: false,
 				description:"Create Group Success"
 			};
 		}).catch(function(error){
 			console.log(error);
 			return {
-				groupCreated: false,
+				isCreated: false,
+				isError: true,
 				description: 'error in create group'
 			};
 		});
@@ -41,7 +43,8 @@ module.exports={
 				groupUpdated: false,
 				description: 'error in update group information'
 			};
-		})
+		});
+		return Result;
 	},
 	createUserForGroup:async function(req, res) {
 		let groupId = req.groupId;
