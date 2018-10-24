@@ -1,4 +1,4 @@
-const relationService = require("../../relationService");
+const relationService = require("../../services/relationService");
 
 describe("Test RelationService",()=>{
 	it("Test eventUserRelation", ()=>{

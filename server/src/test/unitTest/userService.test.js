@@ -11,7 +11,7 @@ describe("register user by user", ()=>{
 			let users = result[0].count;
 			users = users+100000;
 			let userId = await userHelper.createUserId();
-			expect(userId).toBe(100001);
+			expect(userId).toBe(100013);
 		}).catch(function(error){
 			console.log(error);
 		});

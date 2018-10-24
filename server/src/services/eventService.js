@@ -4,16 +4,16 @@ const eventHelper = require('./helper/eventHelper');
 module.exports={
 	createEvent: async function(req, res){
 		const event = await eventHelper.eventInfo_array(req);
-		const InsertCommand = 'INSERT INTO Events(eventTitle, description, date, location, sponsor, sponsorPhone) VALUES(?, ?, ?, ?, ?, ?)';
-		const Result = await mysqlConnection.query(InsertCommand, event, function(error, results, fields){
-			if(error) {
-				return {isEventCreated:false};
-				res.status(400).send({isEventCreated:false});
-				throw error;
-			}
-			res.status(200).send({isEventCreated:true});
-			return {isEventCreated:true};
+		const InsertCommand = 'INSERT INTO Events(eventId, eventTitle, eventDescription, location, startsDate, endsDate, OrganizerName, OrganizerDescription, OrganizerEmail, OrganizerPhone) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		const Result = await mysqlPromise
+		.then(function(connection){
+			return connection.query(InsertCommand, event);
+		}).then(function(results){
+			return {isEventCreated:true}
+		}).catch(function(error){
+			return {isEventCreated:false, Error:error}
 		});
+		return Result;
 	},
 	getEvent:async function(req, res){
 		const eventId = req.eventId;
@@ -33,10 +33,10 @@ module.exports={
 		mysqlPromise.then(function(connection){
 			return connection.query(Command, eventInfo);
 		}).then(function(results){
-			res.status(200).send({isEventUpdated: true, results[]});
+			res.status(200).send({isEventUpdated: true});
 		}).catch(function(error){
 			console.log(error);
-			res.status(400).send({isEventUpdated:false, error});
+			res.status(400).send({isEventUpdated:false,Error:error});
 		});
 	},
 	deleteEvent:async function(req, res){
