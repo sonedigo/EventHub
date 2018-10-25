@@ -17,36 +17,40 @@ module.exports={
 	},
 	getEvent:async function(req, res){
 		const eventId = req.eventId;
-		const Command = 'SELECT * AS EventInfo FROM Events WHERE eventId = ?';
-		mysqlPromise.then(function(connection){
+		const Command = 'SELECT * FROM Events WHERE eventId = ?';
+		const Result = await mysqlPromise.then(function(connection){
 			return connection.query(Command, eventId);
 		}).then(function(results){
-			res.status(200).send(results[0].EventInfo);
+			return {result: results[0], isGot:true}
 		}).catch(function(error){
 			console.log(error);
-			res.status(400).send(error);
+			return {Error:error, isGot:false};
 		});
+		return Result;
 	},
-	updateEvent:async function(req, res){
-		const Command = 'UPDATE Events SET eventTitle = ?, description = ?, date = ?, location = ?, sponsor = ?, sponsorPhone = ? WHERE eventId = ?';
-		const eventInfo = await eventHelper.eventInfo_array_withId(req, req.eventId);
-		mysqlPromise.then(function(connection){
+	updateEvent:async function(_, res){
+		//const _=req;
+		const Command = 'UPDATE Events SET eventTitle = ?, eventDescription = ?, location = ?, startsDate = ?, endsDate= ?, OrganizerName = ?, OrganizerDescription = ?, OrganizerEmail = ?, OrganizerPhone = ? WHERE eventId = ?';
+		const eventInfo = 				[_.eventTitle, _.eventDescription, _.location, _.startsDate, _.endsDate, _.OrganizerName, _.OrganizerDescription, _.OrganizerEmail, _.OrganizerPhone, _.eventId];
+		const Result = await mysqlPromise.then(function(connection){
 			return connection.query(Command, eventInfo);
 		}).then(function(results){
-			res.status(200).send({isEventUpdated: true});
+			return {isEventUpdated: true}
 		}).catch(function(error){
 			console.log(error);
-			res.status(400).send({isEventUpdated:false,Error:error});
+			return {isEventUpdated:false,Error:error}
 		});
+		return Result;
 	},
 	deleteEvent:async function(req, res){
-		const Command = 'DELETE * FROM Events WHERE eventId = ?';
+		const Command = 'DELETE FROM Events WHERE eventId = ?';
 		const Result = await mysqlPromise.then(function(connection){
 			return connection.query(Command, req.eventId);
 		}).then(function(results){
-			return true;
+			return {isEventDeleted: true};
 		}).catch(function(error){
 			console.log(error);
+			return {isEventDeleted: false, Error:error};
 		});
 		return Result;
 	},

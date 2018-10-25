@@ -27,7 +27,7 @@ function createEventId(){
 	return mysqlPromise.then(function(connection){
 		return connection.query("SELECT COUNT(eventId) AS event_counter FROM Events");
 	}).then(function(results){
-		return results[0].event_counter;
+		return results[0].event_counter+10000000;
 	}).catch(function(error){
 		console.log(error);
 		return null;

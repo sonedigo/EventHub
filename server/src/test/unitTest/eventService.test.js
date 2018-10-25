@@ -15,6 +15,7 @@ const eventInfo = {
 
 const eventInfo_error = {
 	//eventTitle is null
+	eventId:10,
 	eventDescription: "dasd",
 	location:"dadf",
 	startsDate: "dafvgaga",
@@ -25,21 +26,44 @@ const eventInfo_error = {
 	OrganizerPhone: undefined
 
 }
+const eventInfo_update = {
+	eventId: 10,
+	eventTitle: "eventTitle",
+	eventDescription: "dasd",
+	location:"dadf",
+	startsDate: "dafvgaga",
+	endsDate : "dfvzvafg",
+	OrganizerName: "daggad",
+	OrganizerDescription: "dasdfa",
+	OrganizerEmail: undefined ,
+	OrganizerPhone: undefined};
+const eventInfo_error_update = eventInfo_error;
+let res = jest.fn();
+
 describe("Test eventService",()=>{
-	it("Test createEvent",async function(){
-		let res = jest.fn();
+	it("Test createEvent",async()=>{
+		
 		let return_info = await eventService.createEvent(eventInfo);
 		let return_info_error = await eventService.createEvent(eventInfo_error);
-		expect(return_info.isEventCreated).toBe(true);
+		expect(return_info).toBe(true);
 		expect(return_info_error.isEventCreated).toBe(false);
 	});
-	it("Test updateEvent", ()=>{
-
+	it("Test updateEvent", async()=>{
+		let return_info = await eventService.updateEvent(eventInfo_update);
+		let return_info_error = await eventService.updateEvent(eventInfo_error);
+		expect(return_info.isEventUpdated).toBe(true);
+		expect(return_info_error.isEventUpdated).toBe(false);
 	});
-	it("Test getEvent", ()=>{
-
+	it("Test getEvent", async()=>{
+		let return_info = await eventService.getEvent({eventId:8});
+		let return_info_error = await eventService.getEvent(0);
+		expect(return_info.isGot).toBe(true);
+		expect(return_info_error.isGot).toBe(false);
 	});
-	it("Test deleteEvent", ()=>{
-
+	it("Test deleteEvent", async()=>{
+		let return_info = await eventService.deleteEvent({eventId:});
+		let return_info_error = await eventService.deleteEvent(0);
+		expect(return_info.isEventDeleted).toBe(true);
+		expect(return_info_error.isEventDeleted).toBe(false);
 	});
 })
