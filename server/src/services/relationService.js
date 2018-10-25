@@ -4,7 +4,7 @@ module.exports={
 	createGroupUserRelation:async function(groupId, userId){
 		const Command = 'INSERT INTO GroupUsersRelation(groupId, userId) VALUES(?, ?)';
 		const whetherSuccess = await mysqlPromise.then(function(connection){
-			connection.query(Command, [groupId,userId]);
+			return connection.query(Command, [groupId,userId]);
 		}).then(function(results){
 			return true;
 		}).catch(function(error){
@@ -13,9 +13,7 @@ module.exports={
 		})
 		return whetherSuccess;
 	},
-	createEventUserRelation:async function(objectId){
-		const eventId = objectId.eventId;
-		const userId = objectId.userId;
+	createEventUserRelation:async function(eventId, userId){
 		const Command = 'INSERT INTO EventUsersRelation(eventId, userId) VALUES(?, ?)';
 		const whetherSuccess = await mysqlPromise.then(function(connection){
 			return connection.query(Command, [eventId, userId]);
@@ -27,10 +25,8 @@ module.exports={
 		});
 		return whetherSuccess;
 	},
-	createEventGroupRelation:async function(objectId){
-		const eventId = objectId.eventId;
-		const groupId = objectId.groupId;
-		const Command = 'INSERT INTO EventUsersRelation(eventId, groupId) VALUES(?, ?)';
+	createEventGroupRelation:async function(eventId, groupId){
+		const Command = 'INSERT INTO EventGroupsRelation(eventId, groupId) VALUES(?, ?)';
 		const whetherSuccess = await mysqlPromise.then(function(connection){
 			return connection.query(Command, [eventId, groupId]);
 		}).then(function(results){
@@ -54,7 +50,7 @@ module.exports={
 		return whetherSuccess;
 	},
 	removeUserFromGroup:async function(groupId, userId){
-		const Command = 'DELETE * FROM GroupUsersRelation WHERE groupId =? AND userId =?';
+		const Command = 'DELETE FROM GroupUsersRelation WHERE groupId =? AND userId =?';
 		const whetherSuccess = await mysqlPromise.then(function(connection){
 			return connection.query(Command, [groupId, userId]);
 		}).then(function(results){
