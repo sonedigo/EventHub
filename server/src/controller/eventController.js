@@ -5,15 +5,19 @@ const authenticateService = require('../services/authenticateService');
 const groupService = require('../services/groupService');
 const eventService = require('../services/eventService');
 const relationService = require('../services/relationService');
+const senderService = require('../services/senderService');
 
 module.exports={
 	userCreateEvent:async function(req, res){
 		const infoPart = req.body;
-		eventService.createEvent(infoPart, res).then(function(result){
-			eventService.createEventUserRelation(infoPart, result);
-		}).catch(function(error){
-			console.log(error);
-		});
+		const eventCreateResponse = await eventService.createEvent(infoPart, res);
+		const relationCreateResponse = await relationService.createEventUserRelation(eventCreateResponse.eventId, req.body.userId);
+		if(response.isEventCreated){
+			senderService.successSender(response, res);
+		}else{
+			senderService.errorSender(response, res);
+		};
+		
 	},
 	updateEvent:async function(req, res){
 		const infoPart = req.body;

@@ -9,7 +9,7 @@ module.exports={
 		.then(function(connection){
 			return connection.query(InsertCommand, event);
 		}).then(function(results){
-			return {isEventCreated:true}
+			return {isEventCreated:true, eventId:event[6]};//should come with another service inside here
 		}).catch(function(error){
 			return {isEventCreated:false, Error:error}
 		});
