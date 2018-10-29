@@ -3,13 +3,15 @@ const eventHelper = require('./helper/eventHelper');
 
 module.exports={
 	createEvent: async function(req, res){
+		let connect;
 		const event = await eventHelper.eventInfo_array(req);
 		const InsertCommand = 'INSERT INTO Events(eventId, eventTitle, eventDescription, location, startsDate, endsDate, OrganizerName, OrganizerDescription, OrganizerEmail, OrganizerPhone) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		const Result = await mysqlPromise
 		.then(function(connection){
+			connect = connection;
 			return connection.query(InsertCommand, event);
 		}).then(function(results){
-			return {isEventCreated:true, eventId:event[6]};//should come with another service inside here
+			return {isEventCreated:true, eventId:event[0]};//should come with another service inside here
 		}).catch(function(error){
 			return {isEventCreated:false, Error:error}
 		});
@@ -29,7 +31,7 @@ module.exports={
 		return Result;
 	},
 	updateEvent:async function(_, res){
-		//const _=req;
+		const _=req;
 		const Command = 'UPDATE Events SET eventTitle = ?, eventDescription = ?, location = ?, startsDate = ?, endsDate= ?, OrganizerName = ?, OrganizerDescription = ?, OrganizerEmail = ?, OrganizerPhone = ? WHERE eventId = ?';
 		const eventInfo = 				[_.eventTitle, _.eventDescription, _.location, _.startsDate, _.endsDate, _.OrganizerName, _.OrganizerDescription, _.OrganizerEmail, _.OrganizerPhone, _.eventId];
 		const Result = await mysqlPromise.then(function(connection){

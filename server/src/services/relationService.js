@@ -49,6 +49,18 @@ module.exports={
 		});
 		return whetherSuccess;
 	},
+	deleteEventUserRelation:async()=>{
+
+	},
+	deleteEventGroupRelation:async()=>{
+
+	},
+	deleteGroupUserRelation:async()=>{
+
+	},
+	deleteUserRoleRelation:async()=>{
+
+	},
 	removeUserFromGroup:async function(groupId, userId){
 		const Command = 'DELETE FROM GroupUsersRelation WHERE groupId =? AND userId =?';
 		const whetherSuccess = await mysqlPromise.then(function(connection){
