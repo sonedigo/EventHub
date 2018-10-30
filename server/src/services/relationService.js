@@ -49,17 +49,53 @@ module.exports={
 		});
 		return whetherSuccess;
 	},
-	deleteEventUserRelation:async()=>{
-
+	deleteEventUserRelation:async(eventId, userId)=>{
+		const command = 'DELETE FROM EventUsersRelation WHERE eventId=? OR userId=?';
+		const whetherSuccess = await mysqlPromise.then(function(connection){
+			return connection.query(command,[eventId,userId]);
+		}).then(function(results){
+			return true;
+		}).catch(function(error){
+			console.log(error);
+			return false;
+		});
+		return whetherSuccess;
 	},
-	deleteEventGroupRelation:async()=>{
-
+	deleteEventGroupRelation:async(eventId, groupId)=>{
+		const command = 'DELETE FROM EventGroupsRelation WHERE eventId=? OR groupId=?';
+		const whetherSuccess = await mysqlPromise.then(function(connection){
+			return connection.query(command,[eventId,groupId]);
+		}).then(function(results){
+			return true;
+		}).catch(function(error){
+			console.log(error);
+			return false;
+		});
+		return whetherSuccess;
 	},
-	deleteGroupUserRelation:async()=>{
-
+	deleteGroupUserRelation:async(userId, groupId)=>{
+		const command = 'DELETE FROM GroupUsersRelation WHERE userId=? OR groupId=?';
+		const whetherSuccess = await mysqlPromise.then(function(connection){
+			return connection.query(command,[userId,groupId]);
+		}).then(function(results){
+			return true;
+		}).catch(function(error){
+			console.log(error);
+			return false;
+		});
+		return whetherSuccess;
 	},
 	deleteUserRoleRelation:async()=>{
-
+		const command = 'DELETE FROM UserRolesRelation WHERE  userId=?';
+		const whetherSuccess = await mysqlPromise.then(function(connection){
+			return connection.query(command,[userId]);
+		}).then(function(results){
+			return true;
+		}).catch(function(error){
+			console.log(error);
+			return false;
+		});
+		return whetherSuccess;
 	},
 	removeUserFromGroup:async function(groupId, userId){
 		const Command = 'DELETE FROM GroupUsersRelation WHERE groupId =? AND userId =?';
