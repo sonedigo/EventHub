@@ -42,6 +42,11 @@ const styles = theme => ({
   },
   height: {
     height: "220px"
+  },
+  errorText: {
+    color: "red",
+    padding: "10px 0 30px 0",
+    fontSize: "15px"
   }
 });
 
@@ -55,16 +60,15 @@ class start extends Component {
     email: {
       value: "",
       validation: {
-        isrequired: true,
+        isRequired: true,
         isEmail: true
       },
       valid: false,
       touched: false
     }
   };
-
   checkValidality(value, rules) {
-    let isvalid = true;
+    let isValid = true;
     if (!rules) {
       return true;
     }
@@ -75,11 +79,13 @@ class start extends Component {
       const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       isValid = pattern.test(value) && isValid;
     }
-    return isvalid;
+    return isValid;
   }
+
   emailInputHandler = event => {
     let updateEmail = { ...this.state.email };
-    (updateEmail.touch = true), (updateEmail.value = this.event.target.value);
+    updateEmail.value = event.target.value;
+    updateEmail.touched = true;
     updateEmail.valid = this.checkValidality(
       updateEmail.value,
       updateEmail.validation
@@ -88,6 +94,7 @@ class start extends Component {
       email: updateEmail
     });
   };
+
   emailPostHandler = () => {
     const emailPost = {
       email: this.state.email
@@ -96,12 +103,21 @@ class start extends Component {
   };
   render() {
     const { classes } = this.props;
+    const Email = this.state.email;
     let SignUpOrLogIn = "";
     if (this.state.email !== "") {
       SignUpOrLogIn = "LogIn";
     } else {
       SignUpOrLogIn = "SignUp";
     }
+    let Error =
+      Email.touched === true && Email.valid === false ? (
+        <div className={classes.errorText}>This is not a valid email</div>
+      ) : null;
+
+    // if (Email.touched === true && Email.valid === false){
+
+    // }
     return (
       <div>
         <TextField
@@ -113,21 +129,24 @@ class start extends Component {
           autoComplete="email"
           margin="normal"
           variant="outlined"
-          value={this.props.email}
+          value={Email.value}
           onChange={this.emailInputHandler}
+          error={Email.touched && !Email.valid}
         />
         <br />
-        {/* <div>{this.state.email}</div> */}
+        {Error}
         <Button
           variant="contained"
           color="secondary"
           className={classes.button}
           onClick={this.emailPostHandler}
+          disabled={!Email.valid}
         >
           <Link to={`/SignIn/${SignUpOrLogIn}`} className={classes.toolbarItem}>
             Get Started
           </Link>
         </Button>
+
         <div className={classes.height} />
       </div>
     );
