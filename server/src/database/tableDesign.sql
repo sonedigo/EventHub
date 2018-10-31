@@ -65,6 +65,18 @@ create table Permission(
 	permissionId int PRIMARY KEY,
 	permissionName varchar(200)
 );
+create table userPermit(
+	userId int NOT NULL,
+	permissionId int NOT NULL
+);
+create table groupPermit(
+	groupId int NOT NULL,
+	permissionId int NOT NULL
+);
+create table adminPermit(
+	adminId int NOT NULL,
+	permissionId int NOT NULL
+);
 
 create table UserRoles(
 	relationId int PRIMARY KEY AUTO_INCREMENT,
