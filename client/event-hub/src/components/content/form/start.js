@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import SignInServices from "../../../services/api/signInServices";
+import SignInServices from "../../../services/apiServices/signInServices";
+import checkValidality from "../../../services/validationServices/validation";
 
 const styles = theme => ({
   textField: {
@@ -67,26 +68,12 @@ class start extends Component {
       touched: false
     }
   };
-  checkValidality(value, rules) {
-    let isValid = true;
-    if (!rules) {
-      return true;
-    }
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid;
-    }
-    return isValid;
-  }
 
   emailInputHandler = event => {
     let updateEmail = { ...this.state.email };
     updateEmail.value = event.target.value;
     updateEmail.touched = true;
-    updateEmail.valid = this.checkValidality(
+    updateEmail.valid = checkValidality(
       updateEmail.value,
       updateEmail.validation
     );

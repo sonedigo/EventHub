@@ -2,7 +2,8 @@ import React, { Component, Fragment } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import SignInServices from "../../../services/api/signInServices";
+import SignInServices from "../../../services/apiServices/signInServices";
+import checkValidality from "../../../services/validationServices/validation";
 
 const styles = theme => ({
   textField: {
@@ -43,14 +44,36 @@ const styles = theme => ({
     "&:hover": {
       textDecoration: "underline"
     }
+  },
+  errorText: {
+    color: "red",
+    padding: "10px 0 30px 0",
+    fontSize: "15px"
   }
 });
 
 class logIn extends Component {
-  state = { password: "" };
+  state = {
+    password: {
+      value: "",
+      validation: {
+        isRequired: true,
+        isPassword: true
+      },
+      valid: false,
+      touched: false
+    }
+  };
   passwordInputHandler = event => {
+    let updatePassword = { ...this.state.password };
+    updatePassword.value = event.target.value;
+    updatePassword.touched = true;
+    updatePassword.valid = checkValidality(
+      updatePassword.value,
+      updatePassword.validation
+    );
     this.setState({
-      password: event.target.value
+      password: updatePassword
     });
   };
   logInPostHandler = () => {
@@ -61,6 +84,14 @@ class logIn extends Component {
   };
   render() {
     const { classes } = this.props;
+    const Password = this.state.password;
+    let Error =
+      Password.touched === true && Password.valid === false ? (
+        <div className={classes.errorText}>
+          Minimum eight characters, at least one uppercase letter, one lowercase
+          letter, one number and one special character
+        </div>
+      ) : null;
     return (
       <Fragment>
         <TextField
@@ -84,13 +115,16 @@ class logIn extends Component {
           margin="normal"
           variant="outlined"
           onChange={this.passwordInputHandler}
+          error={Password.touched && !Password.valid}
         />
         <br />
+        {Error}
         <Button
           variant="contained"
           color="secondary"
           className={classes.button}
           onClick={this.logInPostHandler}
+          disabled={!Password.valid}
         >
           <Link to={`/SignIn/where`} className={classes.toolbarItem}>
             Log In

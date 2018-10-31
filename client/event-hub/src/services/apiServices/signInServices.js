@@ -1,9 +1,9 @@
-import api from "../api";
+import api from "./api";
 import axios from "axios";
 
 export default {
   start: async function(credentials) {
-     axios
+    axios
       .post("https://jsonplaceholder.typicode.com/posts", credentials)
       .then(res => {
         console.log(res);
@@ -13,7 +13,7 @@ export default {
       });
   },
   logIn: async function(credentials) {
-     axios
+    axios
       .post("https://jsonplaceholder.typicode.com/posts", credentials)
       .then(res => {
         console.log(res);
@@ -23,7 +23,7 @@ export default {
       });
   },
   signUp: async function(credentials) {
-     axios
+    axios
       .post("https://jsonplaceholder.typicode.com/posts", credentials)
       .then(res => {
         console.log(res);
@@ -32,11 +32,10 @@ export default {
         console.log(err);
       });
   },
-  login: function(username, password){
+  login: function(username, password) {
     //will return whether user can login in: true or false;
-    return api().get('/login',{
-      params:{username, password}
+    return api().get("/login", {
+      params: { username, password }
     });
   }
-
 };
