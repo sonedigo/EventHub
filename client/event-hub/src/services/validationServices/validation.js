@@ -3,7 +3,7 @@ const checkValidality = (value, rules) => {
   if (!rules) {
     return true;
   }
-  if (rules.required) {
+  if (rules.isRequired) {
     isValid = value.trim() !== "" && isValid;
   }
   if (rules.isEmail) {

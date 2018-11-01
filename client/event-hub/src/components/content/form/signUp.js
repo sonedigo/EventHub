@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import SignInServices from "../../../services/apiServices/signInServices";
+import checkValidality from "../../../services/validationServices/validation";
 
 const styles = theme => ({
   textField: {
@@ -91,41 +92,101 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       width: "290px"
     }
+  },
+  errorText: {
+    color: "red",
+    padding: "10px 0 30px 0",
+    fontSize: "15px"
   }
 });
 class signUp extends Component {
   state = {
-    firstName: "",
-    lastName: "",
-    password: ""
+    firstName: {
+      validation: {
+        isRequired: true
+      },
+      valid: false,
+      touched: false
+    },
+    lastName: {
+      validation: {
+        isRequired: true
+      },
+      valid: false,
+      touched: false
+    },
+    password: {
+      value: "",
+      validation: {
+        isRequired: true,
+        isPassword: true
+      },
+      valid: false,
+      touched: false
+    }
   };
+
   firstNameInputHandler = event => {
+    let updateFirstName = { ...this.state.firstName };
+    updateFirstName.value = event.target.value;
+    updateFirstName.touched = true;
+    updateFirstName.valid = checkValidality(
+      updateFirstName.value,
+      updateFirstName.validation
+    );
     this.setState({
-      firstName: event.target.value
+      firstName: updateFirstName
     });
   };
   lastNameInputHandler = event => {
+    let updateLastName = { ...this.state.lastName };
+    updateLastName.value = event.target.value;
+    updateLastName.touched = true;
+    updateLastName.valid = checkValidality(
+      updateLastName.value,
+      updateLastName.validation
+    );
     this.setState({
-      lastName: event.target.value
+      lastName: updateLastName
     });
   };
   passwordInputHandler = event => {
+    let updatePassword = { ...this.state.password };
+    updatePassword.value = event.target.value;
+    updatePassword.touched = true;
+    updatePassword.valid = checkValidality(
+      updatePassword.value,
+      updatePassword.validation
+    );
     this.setState({
-      password: event.target.value
+      password: updatePassword
     });
   };
   signUpPostHandler = () => {
     const signUpPost = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      password: this.state.password
+      firstName: this.state.firstName.value,
+      lastName: this.state.lastName.value,
+      password: this.state.password.value
     };
     SignInServices.start(signUpPost);
   };
   render() {
     const { classes } = this.props;
+    const FirstName = this.state.firstName;
+    const LastName = this.state.lastName;
+    const Password = this.state.password;
+    let formIsValid =
+      Password.valid && FirstName.valid && LastName.valid === true;
+
+    let Error =
+      Password.touched === true && Password.valid === false ? (
+        <div className={classes.errorText}>
+          Minimum eight characters, at least one uppercase letter, one lowercase
+          letter, one number and one special character
+        </div>
+      ) : null;
     return (
-      <Fragment>
+      <div>
         <TextField
           id="outlined-email-input"
           label="Enter email"
@@ -144,6 +205,7 @@ class signUp extends Component {
           variant="outlined"
           className={classes.name}
           onChange={this.firstNameInputHandler}
+          error={FirstName.touched && !FirstName.valid}
         />
         <TextField
           id="outlined-name-last"
@@ -152,6 +214,7 @@ class signUp extends Component {
           variant="outlined"
           className={classes.name}
           onChange={this.lastNameInputHandler}
+          error={LastName.touched && !LastName.valid}
         />
         <br />
         <TextField
@@ -163,24 +226,28 @@ class signUp extends Component {
           margin="normal"
           variant="outlined"
           onChange={this.passwordInputHandler}
+          error={Password.touched && !Password.valid}
         />
         <br />
+        {Error}
         <hr className={classes.line} />
         <div className={classes.text}>
           Your password must be at least 8 characters
         </div>
         <br />
+
         <Button
           variant="contained"
           color="secondary"
           className={classes.button}
           onClick={this.signUpPostHandler}
+          disabled={!formIsValid}
         >
           <Link to={`/SignIn/where`} className={classes.toolbarItem}>
             Sign Up
           </Link>
         </Button>
-      </Fragment>
+      </div>
     );
   }
 }
