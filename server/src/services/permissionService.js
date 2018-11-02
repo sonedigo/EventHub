@@ -2,16 +2,24 @@ const {mysqlConnection, mysqlPromise} = require('../database/mysqlConfig');
 const bcrypt = require('bcrypt');
 
 module.exports={
-	updateUserInfoPermit: async()=>{
-
+	updateUserInfoPermit: async(userId)=>{
+		let permitId;
+		let roleId;
+		let whetherPermit;
 	},
-	updateGroupInfoPermit: async()=>{
-
+	updateGroupInfoPermit: async(groupId)=>{
+		let permitId;
+		let roleId;
+		let whetherPermit;
 	},
-	updateEventPermit: async()=>{
-
+	updateEventPermit: async(eventId)=>{
+		let permitId;
+		let roleId;
+		let whetherPermit;
 	},
-	createUserPermit: async()=>{
-
+	createUserPermit: async(adminId)=>{
+		let permitId;
+		let roleId;
+		let whetherPermit;
 	},
 }

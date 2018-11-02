@@ -31,6 +31,14 @@ create table Events(
 	OrganizerPhone varchar(200) NOT NULL,
 	created_at TIMESTAMP DEFAULT NOW()
 );
+create table adminUserList(
+	adminId int NOT NULL,
+	userId int NOT NULL
+);
+create group groupAdministatorList(
+	groupId int NOT NULL,
+	userId int NOT NULL
+);
 
 create table GroupUsersRelation(
 	relationId int PRIMARY KEY AUTO_INCREMENT,
