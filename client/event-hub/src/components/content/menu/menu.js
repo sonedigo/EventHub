@@ -18,6 +18,7 @@ const styles = theme => ({
     color: "#6f7287",
     fontSize: "15px",
     textAlign: "left",
+    backgroundColor: "#fff",
     "&:hover": {
       color: "#1e0a3c",
       cursor: "pointer",

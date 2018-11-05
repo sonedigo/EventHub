@@ -1,6 +1,7 @@
 import React from "react";
 import { Icon } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+// import HelpMenu from "../menu/headerMenu/helpMenu";
 
 const styles = theme => ({
   title: {
@@ -32,6 +33,7 @@ const icon1 = props => {
   const { classes } = props;
   return (
     <div>
+      {/* <HelpMenu  /> */}
       <Icon className={classes.icon}>star</Icon>
       <div className={classes.title}>Let's get started</div>
       <div className={classes.subTitle}>

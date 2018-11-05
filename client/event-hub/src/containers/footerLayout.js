@@ -6,7 +6,7 @@ import SignInFooter from "../components/footer/signInFooter";
 
 const styles = theme => ({
   container: {
-    display: "flex",
+    display: "relative",
     textAlign: "center",
     margin: "20px",
     color: "#4b4d63"

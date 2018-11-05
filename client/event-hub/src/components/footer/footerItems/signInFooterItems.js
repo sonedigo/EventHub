@@ -10,7 +10,7 @@ const styles = theme => ({
   },
   left: {
     flexFlow: "row wrap",
-    flex: 0.9,
+    flex: 0.8,
     alignItems: "center",
     fontSize: "11px",
     color: "#6f7287",

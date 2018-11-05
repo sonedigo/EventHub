@@ -2,8 +2,8 @@ import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import HeaderItem from "./headerItem/normalHeaderItem";
-import OrganizeDropItem from "../header/headerItem/dropHeaderItem";
+import HeaderItem from "../headerItem/normalHeaderItem";
+import OrganizeDropItem from "../headerItem/dropHeaderItem";
 
 const styles = theme => ({
   appBar: {
@@ -48,8 +48,9 @@ const styles = theme => ({
 
 const header = props => {
   const { classes } = props;
+  console.log(props);
   return (
-    <React.Fragment>
+    <div>
       <AppBar position="static" color="default" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Typography
@@ -63,7 +64,9 @@ const header = props => {
           </Typography>
           <div className={classes.itemContainer}>
             <HeaderItem href="/"> Browse Events</HeaderItem>
-            <OrganizeDropItem>Organize</OrganizeDropItem>
+            <OrganizeDropItem onClick={props.clicked}>
+              Organize
+            </OrganizeDropItem>
             <OrganizeDropItem>Help</OrganizeDropItem>
             <HeaderItem href="/">
               <span className={classes.active}>Create Event</span>
@@ -77,7 +80,7 @@ const header = props => {
         </Toolbar>
       </AppBar>
       <hr className={classes.underline} />
-    </React.Fragment>
+    </div>
   );
 };
 
