@@ -16,7 +16,7 @@ class App extends Component {
   };
 
   render() {
-    let menu = this.state.showMenu ? Menu : null;
+    let menu = this.state.showMenu ? <Menu /> : null;
     return (
       <div className="App">
         <MainHeader clicked={this.toggleMenu} />

@@ -30,7 +30,7 @@ const headerItem2 = props => {
   const { classes } = props;
   return (
     <div className={classes.item}>
-      <div className={classes.footerLink}>
+      <div className={classes.footerLink} onClick={props.name}>
         {props.children}
         <Icon className={classes.icon}>keyboard_arrow_down</Icon>
       </div>

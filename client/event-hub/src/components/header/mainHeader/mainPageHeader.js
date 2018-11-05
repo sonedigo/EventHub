@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import HeaderItem from "../headerItem/normalHeaderItem";
-import OrganizeDropItem from "../headerItem/dropHeaderItem";
+import DropItem from "../headerItem/dropHeaderItem";
 
 const styles = theme => ({
   appBar: {
@@ -64,10 +64,8 @@ const header = props => {
           </Typography>
           <div className={classes.itemContainer}>
             <HeaderItem href="/"> Browse Events</HeaderItem>
-            <OrganizeDropItem onClick={props.clicked}>
-              Organize
-            </OrganizeDropItem>
-            <OrganizeDropItem>Help</OrganizeDropItem>
+            <DropItem name={props.clicked}>Organize</DropItem>
+            <DropItem>Help</DropItem>
             <HeaderItem href="/">
               <span className={classes.active}>Create Event</span>
             </HeaderItem>
