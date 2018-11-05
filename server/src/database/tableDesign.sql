@@ -31,6 +31,14 @@ create table Events(
 	OrganizerPhone varchar(200) NOT NULL,
 	created_at TIMESTAMP DEFAULT NOW()
 );
+create table adminUserList(
+	adminId int NOT NULL,
+	userId int NOT NULL
+);
+create group groupAdministatorList(
+	groupId int NOT NULL,
+	userId int NOT NULL
+);
 
 create table GroupUsersRelation(
 	relationId int PRIMARY KEY AUTO_INCREMENT,
@@ -64,6 +72,18 @@ create table Roles(
 create table Permission(
 	permissionId int PRIMARY KEY,
 	permissionName varchar(200)
+);
+create table userPermit(
+	userId int NOT NULL,
+	permissionId int NOT NULL
+);
+create table groupPermit(
+	groupId int NOT NULL,
+	permissionId int NOT NULL
+);
+create table adminPermit(
+	adminId int NOT NULL,
+	permissionId int NOT NULL
 );
 
 create table UserRoles(
