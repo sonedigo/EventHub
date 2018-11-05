@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import HeaderItem from "../headerItem/normalHeaderItem";
-import OrganizeDropItem from "../headerItem/dropHeaderItem";
+import DropItem from "../headerItem/dropHeaderItem";
 
 const styles = theme => ({
   appBar: {
@@ -49,7 +49,7 @@ const styles = theme => ({
 const header = props => {
   const { classes } = props;
   return (
-    <React.Fragment>
+    <div>
       <AppBar position="static" color="default" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Typography
@@ -63,7 +63,7 @@ const header = props => {
           </Typography>
           <div className={classes.itemContainer}>
             <HeaderItem href="/"> Browse Events</HeaderItem>
-            <OrganizeDropItem>Help</OrganizeDropItem>
+            <DropItem name={props.clicked}>Help</DropItem>
             <HeaderItem>
               <Link to={"/SignIn"} className={classes.toolbarItem}>
                 Sign In
@@ -73,7 +73,7 @@ const header = props => {
         </Toolbar>
       </AppBar>
       <hr className={classes.underline} />
-    </React.Fragment>
+    </div>
   );
 };
 

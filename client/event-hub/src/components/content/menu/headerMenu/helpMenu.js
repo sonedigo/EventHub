@@ -58,7 +58,7 @@ class organizeMenu extends Component {
     ]
   };
   render() {
-    return <Menu title="Help" list={this.state.helpOptions} />;
+    return <Menu list={this.state.helpOptions} />;
   }
 }
 
