@@ -1,6 +1,6 @@
 create table Users(
      userId int PRIMARY KEY,
-     userName varchar(100) NOT NULL,
+     userName varchar(100),
      email varchar(200) NOT NULL,
      phone varchar(20),
      password varchar(255) NOT NULL,
@@ -11,7 +11,7 @@ create table Users(
 
 create table userGroups(
 	groupId int PRIMARY KEY,
-	groupName varchar(100) NOT NULL,
+	groupName varchar(100),
 	email varchar(200) NOT NULL,
     phone varchar(20),
     password varchar(255) NOT NULL,

@@ -28,6 +28,7 @@ module.exports = (app) => {
   app.patch('/patch/eventinfo',EventController.updateEvent);
   app.patch('/user/updateuserinfo', CRUDController.updateUserInfo);
 
-  app.delete('/event/delete', EventController.deleteEvent); //
+  app.delete('/event/group/delete', EventController.groupDeleteEvent); //
+  app.delete('/event/user/delete', EventController.userDeleteEvent);
  
 }

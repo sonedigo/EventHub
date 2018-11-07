@@ -5,7 +5,7 @@ const authenticateService = require('../services/authenticateService');
 const groupService = require('../services/groupService');
 
 module.exports={
-	registerUser(req, res){
+	registerUser:async(req, res)=>{
 		let queryPart = req.body;
 		userService.createUser(queryPart, res);
 	},

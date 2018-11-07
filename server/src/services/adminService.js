@@ -5,7 +5,7 @@ const eventService = require('./eventService');
 
 module.exports={
 	createGroup:async function(req, res) {
-
+		
 	},
 	deleteGroup:async function(req, res) {
 

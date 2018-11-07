@@ -86,7 +86,7 @@ class start extends Component {
     const emailPost = {
       email: this.state.email
     };
-    SignInServices.start(emailPost);
+  SignInServices.start(emailPost);
   };
   render() {
     const { classes } = this.props;

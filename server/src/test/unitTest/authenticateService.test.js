@@ -8,7 +8,7 @@ describe('Authenticate Service Test', ()=>{
 		const password = '1234431441';
 		const encryptedPasswordLength = await authenticateService.encryptPassword(password);
 		expect(encryptedPasswordLength.length).toBe(60);
-	})
+	});
 
 	it('should be vaild login',async function(){
 		const username = 'sonedigo';
@@ -36,6 +36,6 @@ describe('Authenticate Service Test', ()=>{
 		const not_duplicateResult = await authenticateService.isDuplicatedUsername(user_not_duplicate);
 		expect(duplicateResult).toBe(true);
 		expect(not_duplicateResult).toBe(false);
-	})
+	});
 
 })

@@ -3,14 +3,15 @@ import axios from "axios";
 
 export default {
   start: async function(credentials) {
-    axios
+    let whetherResgister =  axios
       .post("https://jsonplaceholder.typicode.com/posts", credentials)
       .then(res => {
-        console.log(res);
+        return res;
       })
       .catch(err => {
         console.log(err);
       });
+      return whetherResgister;
   },
   logIn: async function(credentials) {
     axios
