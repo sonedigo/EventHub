@@ -2,10 +2,10 @@ const {mysqlConnection, mysqlPromise} = require('../database/mysqlConfig');
 const eventHelper = require('./helper/eventHelper');
 const relationService = require('./relationService');
 const senderService = require('../services/senderService');
+const authenticateService = require('./authenticateService');
 
 module.exports={
 	userCreateEvent:async function(req, res){
-		let connect;
 		const event = await eventHelper.eventInfo_array(req);
 		const InsertCommand = 'INSERT INTO Events(eventId, eventTitle, eventDescription, location, startsDate, endsDate, OrganizerName, OrganizerDescription, OrganizerEmail, OrganizerPhone) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		const eventCreateResponse = await mysqlPromise
@@ -17,7 +17,6 @@ module.exports={
 		}).catch(function(error){
 			return {isEventCreated:false, Error:error}
 		});
-		return eventCreateResponse;
 		//const eventCreateResponse = await createEvent(infoPart, res);
 		const relationCreateResponse = await relationService.createEventUserRelation(eventCreateResponse.eventId, req.userId);
 		if(eventCreateResponse.isEventCreated && relationCreateResponse){
@@ -25,6 +24,8 @@ module.exports={
 		}else{
 			senderService.errorSender(eventCreateResponse, res);
 		};
+		return eventCreateResponse;
+		
 	},
 	createEvent: async function(req, res){
 		let connect;
@@ -52,6 +53,11 @@ module.exports={
 			console.log(error);
 			return {Error:error, isGot:false};
 		});
+		if(Result.isGot){
+			senderService.successSender(result, res);
+		}else {
+			senderService.errorSender(result, res);
+		}
 		return Result;
 	},
 	updateEvent:async function(_, res){
@@ -95,6 +101,24 @@ module.exports={
 			senderService.errorSender(step_2,res)
 		}
 		return [step_1,step_2];
+	},
+	groupDeleteEvent:async function(req, res){
+		const infoPart = req.body;
+		const step_1 = await mysqlPromise.then(function(connection){
+			return connection.query(Command, req.eventId);
+		}).then(function(results){
+			return {isEventDeleted: true};
+		}).catch(function(error){
+			console.log(error);
+			return {isEventDeleted: false, Error:error};
+		});
+		const step_2 = await eventService.deleteUserEventRelation(infoPart, res);
+		if(step_1.isEventDeleted && step_2.isDeleted){
+			senderService.successSender({step_1,step_2},res);
+		}else{
+			senderService.errorSender({step_1, step_2},res);
+		}
+		return [step_1, step_2];
 	},
 	groupCreateEvent:async function(req, res){
 		//need to be refactor with async 
