@@ -21,7 +21,7 @@ module.exports.validUser = async function (username, password){
 		return WhetherPass;
 }
 
-module.exports.isDuplicatedEmail = async function(email){
+module.exports.checkDuplicatedEmail = async function(email){
 		let functionReturn;	
 		const queryCommand = 'SELECT COUNT(email) AS duplicateResult FROM Users WHERE email = ?';
 		const queryresult = await mysqlPromise.then(function(connection){
@@ -33,10 +33,15 @@ module.exports.isDuplicatedEmail = async function(email){
 		}).catch(function(error){
 			console.log(error);
 		});
+		if(queryresult){
+			res.status(400).send({duplicate: true });
+		}else {
+			res.status(200).send({duplicate: false });
+		}
 		return queryresult;
 		
 }
-module.exports.isDuplicatedUsername = async function(username){
+module.exports.checkDuplicatedUsername = async function(username){
 	let functionReturn;	
 		const queryCommand = 'SELECT COUNT(userName) AS duplicateResult FROM Users WHERE userName = ?'
 		const queryresult = await mysqlPromise.then(function(connection){
@@ -48,6 +53,11 @@ module.exports.isDuplicatedUsername = async function(username){
 		}).catch(function(error){
 			console.log(error);
 		});
+		if(queryresult){
+			res.status(400).send({duplicate: true});
+		}else {
+			res.status(200).send({duplicate: false});
+		}
 		return queryresult;
 		
 }

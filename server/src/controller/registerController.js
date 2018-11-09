@@ -6,29 +6,15 @@ const groupService = require('../services/groupService');
 
 module.exports={
 	registerUser:async(req, res)=>{
-		let queryPart = req.body;
-		userService.createUser(queryPart, res);
+		userService.createUser(req.body, res);
 	},
 	registerGroup(req, res){
-		let queryPart = req.body;
-		groupService.createGroup(queryPart, res);
+		groupService.createGroup(req.body, res);
 	},
 	checkDuplicateEmail:async function(req, res){
-		let email = req.body.email;
-		let whetherDuplicate = await authenticateService.checkDuplicateEmail(email);
-		if(whetherDuplicate){
-			res.status(400).send({duplicate: true});
-		}else {
-			res.status(200).send({duplicate: false});
-		}
+		authenticateService.checkDuplicateEmail(req.query.email);
 	},
 	checkDuplicateUsername:async function(req, res){
-		let username = req.body.username;
-		let WhetherDuplicate = await authenticateService.checkDuplicateUsername(username);
-		if(WhetherDuplicate){
-			res.status(400).send({duplicate: true });
-		}else {
-			res.status(200).send({duplicate: false });
-		}
+		authenticateService.checkDuplicateUsername(req.query.username);
 	}
 }

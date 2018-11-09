@@ -5,8 +5,7 @@ const loginService = require('../services/loginService');
 
 module.exports={
 	login:async function(req, res){
-		const dataPart =req.body;
-		loginService.SignIn(dataPart, res); 
+		loginService.SignIn(req.query, res); 
 	},
 	forgetPassword:async function(req, res){
 
