@@ -1,8 +1,8 @@
-const _ = require('lodash');	//load low_dash library
-const queryService = require('../services/queryService');
-const userService = require('../services/userService');
-const authenticateService = require('../services/authenticateService');
-const groupService = require('../services/groupService');
+const _ = require('lodash')	//load low_dash library
+import {queryService} from '../services/queryService'
+import {userService} from '../services/userService'
+import {authenticateService} from'../services/authenticateService'
+import {groupService} from '../services/groupService'
 
 module.exports={
 	registerUser:async(req, res)=>{
