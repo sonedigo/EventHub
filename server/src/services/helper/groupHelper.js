@@ -15,8 +15,7 @@ module.exports={
 		return queryResult;
 	},
 	createGroupInfo: async function(request, groupId){
-		let infoArray;
-		infoArray = [
+		let infoArray=[
 		groupId,
 		request.groupName,
 		request.email,
