@@ -1,6 +1,7 @@
 const {mysqlConnection, mysqlPromise} = require('../database/mysqlConfig');
 const userService = require('./userService');
 const groupHelper = require('./helper/groupHelper');
+const senderService = require('./senderService');
 
 
 module.exports={
@@ -14,7 +15,7 @@ module.exports={
 			return{
 				isCreated: true,
 				isError: false,
-				description:"Create Group Success"
+				description:'Create Group Success'
 			};
 		}).catch(function(error){
 			console.log(error);
@@ -52,7 +53,7 @@ module.exports={
 		let relationId = await relationService.createGroupUserRelation(groupId, userId);
 		return relationId;
 	},
-	getGroupMembers: async function(req, res){
+	getGroupMember: async function(req, res){
 		let groupId = req.groupId;
 		const command = 'SELECT userId AS users FROM GroupUsersRelation';
 		const queryResult = await mysqlPromise.then(function(connection){
@@ -69,6 +70,11 @@ module.exports={
 				result: error
 			}
 		});
+		if(queryResult.isGot){
+			senderService.success(queryResult, res);
+		}else {
+			senderService.error(queryResult, res);
+		}
 		return queryResult;
 	}
 }

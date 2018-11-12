@@ -8,4 +8,7 @@ module.exports={
 	getGroup:function(req, res){
 
 	},
+	getGroupMember:function(req, res){
+		queryService.getGroupMember(req.query, res);
+	}
 }

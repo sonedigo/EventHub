@@ -18,9 +18,11 @@
     "faker": "^4.1.0",
     "jest": "^23.6.0",
     "jest-mock-axios": "^2.1.11",
+    "latest": "^0.2.0",
     "lodash": "^4.17.11",
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
+    "node": "^11.1.0",
     "promise-mysql": "^3.3.1"
   }
 }

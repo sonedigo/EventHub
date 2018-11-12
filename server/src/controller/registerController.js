@@ -2,7 +2,7 @@ const  _ = require('lodash')	//load low_dash library
 const  queryService =require('../services/queryService')
 const  userService =require('../services/userService')
 const  authenticateService = require('../services/authenticateService')
-const  groupService =  require('../services/groupService')
+const groupService =  require('../services/groupService.js')
 
 module.exports={
 	registerUser:async(req, res)=>{

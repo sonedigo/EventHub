@@ -22,6 +22,8 @@ export default {
     return api().post("", {});
   },
   deleteGroupMember: function(userId, GroupId) {
-    return api();
+    return api().get("/group/delete/getgroupmember",{
+      params:{userId, GroupId};
+    });
   }
 };

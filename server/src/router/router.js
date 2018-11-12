@@ -23,6 +23,8 @@ module.exports = (app) => {
   app.get('/check/username_duplicate', RegisterController.checkDuplicateUsername);
   app.get('/event/getevent', EventController.getEvent)
 
+  app.get('/group/getgroupmember',QueryController.getGroupMember)
+
 
   app.patch('/patch/userinfo', CRUDController.updateUserInfo); //
   app.patch('/patch/eventinfo',EventController.updateEvent);
