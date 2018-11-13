@@ -7,12 +7,13 @@ const EventController = require('../controller/eventController');
 
 module.exports = (app) => {
   app.post('/register/user', RegisterController.registerUser);
-  app.post('/register/group', RegisterController.registerGroup); //
+  app.post('/register/group', RegisterController.registerGroup);
 
   app.post('/user/create_event', EventController.userCreateEvent);
   app.post('/group/create_event', EventController.groupCreateEvent);
+  app.post('/group/registeruserbygroup',RegisterController.registerUserByGroup)
 
-  app.get('/admin/getuser', QueryController.getUser); //
+  app.get('/admin/getuser', QueryController.getUserInfo); //
   app.get('/admin/getgroup', QueryController.getGroup);
 
   app.get('/user/getuserinfo', CRUDController.getUserInfo);

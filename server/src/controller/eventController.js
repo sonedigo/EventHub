@@ -21,7 +21,7 @@ module.exports={
 	},
 	groupDeleteEvent:async function(req, res){
 		eventService.groupDeleteEvent(req.body, res);
-			},
+	},
 	getEvent:async function(req, res){
 		eventService.getEvent(req.body, res);
 	},

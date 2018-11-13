@@ -11,6 +11,9 @@ module.exports={
 	registerGroup(req, res){
 		groupService.createGroup(req.body, res);
 	},
+	registerUserByGroup(){
+		groupService.createUserForGroup(req.body, res);
+	},
 	checkDuplicateEmail:async function(req, res){
 		authenticateService.checkDuplicateEmail(req.query.email);
 	},
